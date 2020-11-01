@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass']
+	selector: 'app-root',
+	styleUrls: ['./app.component.sass'],
+	templateUrl: './app.component.html',
 })
 export class AppComponent {
-  title = 'refresher';
+	title = 'refresher'
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { AppComponent } from './app.component'
+import { CapitalizePipe } from './capitalize.pipe'
 import { HeroesComponent } from './heroes/heroes.component'
 
 @NgModule({
@@ -8,6 +9,7 @@ import { HeroesComponent } from './heroes/heroes.component'
 	declarations: [
 		AppComponent,
 		HeroesComponent,
+		CapitalizePipe,
 	],
 	imports: [
 		BrowserModule,

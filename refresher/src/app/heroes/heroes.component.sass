@@ -11,8 +11,12 @@
 		color: #06a
 
 .my-heroes
-	list-style-type: none
-	margin: 0 0 2em 0
+	$borderRad: 5px
+	$ceramic: #eee
+	$dust: #bbb
+	$poseidon: #077
+	$spacing: .5em
+
 	padding: 0
 	width: 15em
 
@@ -24,36 +28,33 @@
 		padding-inline-start: 0
 
 		li
-			background-color: #eee
-			border-radius: 4px
-			height: 1.6em
+			background-color: $dust
+			border-radius: $borderRad
+			line-height: 1em
 			list-style-type: none
-			margin: .5em
-			padding: .1em .5em .1em 0
+			margin: $spacing
 			vertical-align: middle
 
 			&:hover
-				background-color: #077
-				color: #eee
+				background-color: $poseidon
+				color: $ceramic
 				cursor: pointer
-				// left: .1em
 
 			.selected
 				background-color: #cfd8dc
-				color: #eee
+				color: $ceramic
 
 				&:hover
 					background-color: #bbd8dc
-					color: #eee
+					color: $ceramic
 
 	.badge
 		background-color:#405061
 		// border-radius: 4px 0 0 4px
-		border-radius: 4px
-		color: #eee
+		border-radius: $borderRad
+		color: $ceramic
 		display: inline-block
 		font-size: .8em
-		// height: 1.8em
 		line-height: 1em
-		margin-right: .8em
-		padding: .3em
+		margin: $spacing
+		padding: $spacing

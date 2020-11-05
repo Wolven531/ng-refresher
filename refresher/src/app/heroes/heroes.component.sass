@@ -9,3 +9,51 @@
 
 	.hero-id
 		color: #06a
+
+.my-heroes
+	list-style-type: none
+	margin: 0 0 2em 0
+	padding: 0
+	width: 15em
+
+	ul
+		margin-block-start: 0
+		margin-block-end: 0
+		margin-inline-start: 0
+		margin-inline-end: 0
+		padding-inline-start: 0
+
+		li
+			background-color: #eee
+			border-radius: 4px
+			height: 1.6em
+			list-style-type: none
+			margin: .5em
+			padding: .1em .5em .1em 0
+			vertical-align: middle
+
+			&:hover
+				background-color: #077
+				color: #eee
+				cursor: pointer
+				// left: .1em
+
+			.selected
+				background-color: #cfd8dc
+				color: #eee
+
+				&:hover
+					background-color: #bbd8dc
+					color: #eee
+
+	.badge
+		background-color:#405061
+		// border-radius: 4px 0 0 4px
+		border-radius: 4px
+		color: #eee
+		display: inline-block
+		font-size: .8em
+		// height: 1.8em
+		line-height: 1em
+		margin-right: .8em
+		padding: .3em

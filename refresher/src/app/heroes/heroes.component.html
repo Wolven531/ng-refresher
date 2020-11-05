@@ -1,15 +1,25 @@
-<section class="hero-container" data-id="{{ hero.id }}">
-	<h3>
-		<span class="hero-name">{{ hero.name | capitalize }}</span>
-	</h3>
-	<ul>
-		<li>
-			ID = <span class="hero-id">{{ hero.id }}</span>
-		</li>
-		<li>
-			<label>Update Name -
-				<input [(ngModel)]="hero.name" placeholder="name"/>
-			</label>
-		</li>
-	</ul>
-</section>
+<article class="heroes">
+	<section class="hero-container" data-id="{{ hero.id }}">
+		<h3>
+			<span class="hero-name">{{ hero.name | capitalize }}</span>
+		</h3>
+		<ul>
+			<li>
+				ID = <span class="hero-id">{{ hero.id }}</span>
+			</li>
+			<li>
+				<label>Update Name -
+					<input [(ngModel)]="hero.name" placeholder="name"/>
+				</label>
+			</li>
+		</ul>
+	</section>
+	<section class="my-heroes">
+		<h3>My Heroes</h3>
+		<ul>
+			<li *ngFor="let hero of heroes">
+				<span class="badge">{{hero.id}}</span> {{hero.name}}
+			</li>
+		</ul>
+	</section>
+</article>

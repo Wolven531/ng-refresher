@@ -1,25 +1,32 @@
+// spacing vars
+$borderRad: 5px
+$spaceSmall: .5em
+
+// color vars
+$ceramic: #eee
+$charcoal: #333
+$dust: #bbb
+$grass: #0a0
+$lime: #0f0
+$poseidon: #077
+$seafoam: #0a6
+$sky: #06a
+$slate: #456
+
+
 .hero-container
 	font-size: 1.2em
 
 	.hero-id,
 	.hero-name
-		color: #0a6
+		color: $seafoam
 		font-weight: bold
 		text-decoration: underline
 
 	.hero-id
-		color: #06a
+		color: $sky
 
 .my-heroes
-	$borderRad: 5px
-	$ceramic: #eee
-	$charcoal: #333
-	$dust: #bbb
-	$grass: #0a0
-	$lime: #0f0
-	$poseidon: #077
-	$spacing: .5em
-
 	padding: 0
 	width: 15em
 
@@ -35,7 +42,7 @@
 			border-radius: $borderRad
 			line-height: 1em
 			list-style-type: none
-			margin: $spacing
+			margin: $spaceSmall
 			vertical-align: middle
 
 			&:hover
@@ -52,12 +59,12 @@
 					color: $charcoal
 
 	.badge
-		background-color:#405061
+		background-color: $slate
 		// border-radius: 4px 0 0 4px
 		border-radius: $borderRad
 		color: $ceramic
 		display: inline-block
 		font-size: .8em
 		line-height: 1em
-		margin: $spacing
-		padding: $spacing
+		margin: $spaceSmall
+		padding: $spaceSmall

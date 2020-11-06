@@ -18,7 +18,11 @@
 	<section class="my-heroes">
 		<h3>My Heroes</h3>
 		<ul>
-			<li *ngFor="let hero of heroes" (click)="onHeroSelect(hero)">
+			<li
+				*ngFor="let hero of heroes"
+				(click)="onHeroSelect(hero)"
+				[class.selected]="hero === selectedHero"
+				>
 				<span class="badge">{{hero.id}}</span> {{hero.name}}
 			</li>
 		</ul>

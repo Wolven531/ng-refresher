@@ -13,7 +13,10 @@
 .my-heroes
 	$borderRad: 5px
 	$ceramic: #eee
+	$charcoal: #333
 	$dust: #bbb
+	$grass: #0a0
+	$lime: #0f0
 	$poseidon: #077
 	$spacing: .5em
 
@@ -40,13 +43,13 @@
 				color: $ceramic
 				cursor: pointer
 
-			.selected
-				background-color: #cfd8dc
+			&.selected
+				background-color: $grass
 				color: $ceramic
 
 				&:hover
-					background-color: #bbd8dc
-					color: $ceramic
+					background-color: $lime
+					color: $charcoal
 
 	.badge
 		background-color:#405061

@@ -10,14 +10,15 @@ import { HEROES } from '../../mock-heroes'
 	templateUrl: './heroes.component.html',
 })
 export class HeroesComponent implements OnInit {
-	hero: Hero = {
-		id: 1,
-		name: 'Wolfman',
-	}
 	heroes: Hero[] = HEROES
+	selectedHero: Hero
 
 	constructor() { }
 
 	ngOnInit(): void {
+	}
+
+	onHeroSelect(hero: Hero): void {
+		this.selectedHero = hero
 	}
 }

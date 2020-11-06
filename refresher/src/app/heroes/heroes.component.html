@@ -1,15 +1,16 @@
 <article class="heroes">
-	<section class="hero-container" data-id="{{ hero.id }}">
+	<section class="hero-container" data-id="{{ selectedHero.id }}" *ngIf="selectedHero">
+		<h2>Details</h2>
 		<h3>
-			<span class="hero-name">{{ hero.name | capitalize }}</span>
+			<span class="hero-name">{{ selectedHero.name | capitalize }}</span>
 		</h3>
 		<ul>
 			<li>
-				ID = <span class="hero-id">{{ hero.id }}</span>
+				ID = <span class="hero-id">{{ selectedHero.id }}</span>
 			</li>
 			<li>
 				<label>Update Name -
-					<input [(ngModel)]="hero.name" placeholder="name"/>
+					<input [(ngModel)]="selectedHero.name" placeholder="name"/>
 				</label>
 			</li>
 		</ul>
@@ -17,7 +18,7 @@
 	<section class="my-heroes">
 		<h3>My Heroes</h3>
 		<ul>
-			<li *ngFor="let hero of heroes">
+			<li *ngFor="let hero of heroes" (click)="onHeroSelect(hero)">
 				<span class="badge">{{hero.id}}</span> {{hero.name}}
 			</li>
 		</ul>

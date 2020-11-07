@@ -1,15 +1,15 @@
-<section class="hero-container" data-id="{{ selectedHero.id }}" *ngIf="selectedHero">
+<section class="hero-container" data-id="{{ hero.id }}" *ngIf="hero">
 	<h2>Details</h2>
 	<h3>
-		<span class="hero-name">{{ selectedHero.name | capitalize }}</span>
+		<span class="hero-name">{{ hero.name | capitalize }}</span>
 	</h3>
 	<ul>
 		<li>
-			ID = <span class="hero-id">{{ selectedHero.id }}</span>
+			ID = <span class="hero-id">{{ hero.id }}</span>
 		</li>
 		<li>
 			<label>Update Name -
-				<input [(ngModel)]="selectedHero.name" placeholder="name"/>
+				<input [(ngModel)]="hero.name" placeholder="name"/>
 			</label>
 		</li>
 	</ul>

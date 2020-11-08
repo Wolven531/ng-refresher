@@ -1,6 +1,6 @@
 <section *ngIf="messageService.messages.length">
 	<h3>Messages</h3>
-	<button class="btn-clear" (click)="messageService.clear()">
+	<button class="btn-clear" (click)="messageService.clearAll()">
 		Clear All
 	</button>
 	<p *ngFor="let message of messageService.messages">

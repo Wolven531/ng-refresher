@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Hero } from '../hero.interface'
-
-// mock data, will be replaced by server loaded data
-import { HEROES } from '../../mock-heroes'
+import { HeroService } from '../hero.service'
 
 @Component({
 	selector: 'app-heroes',
@@ -10,12 +8,19 @@ import { HEROES } from '../../mock-heroes'
 	templateUrl: './heroes.component.html',
 })
 export class HeroesComponent implements OnInit {
-	heroes: Hero[] = HEROES
+	heroes: Hero[]
 	selectedHero: Hero
 
-	constructor() { }
+	constructor(
+		private readonly heroService: HeroService,
+	) { }
+
+	loadHeroes(): void {
+		this.heroes = this.heroService.getHeroes()
+	}
 
 	ngOnInit(): void {
+		this.loadHeroes()
 	}
 
 	onHeroSelect(hero: Hero): void {

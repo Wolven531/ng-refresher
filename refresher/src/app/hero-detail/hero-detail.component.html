@@ -1,4 +1,5 @@
 <section class="hero-container" data-id="{{ hero.id }}" *ngIf="hero">
+	<button (click)="goBack()">Go Back</button>
 	<h2>Details</h2>
 	<h3>
 		<span class="hero-name">{{ hero.name | capitalize }}</span>

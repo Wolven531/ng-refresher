@@ -18,6 +18,10 @@ export class HeroDetailComponent implements OnInit {
 		private readonly heroService: HeroService,
 	) { }
 
+	goBack(): void {
+		this.location.back()
+	}
+
 	ngOnInit(): void {
 		this.loadHero()
 	}

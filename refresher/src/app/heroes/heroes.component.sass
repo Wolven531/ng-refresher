@@ -47,20 +47,22 @@ $slate: #456
 
 			&:hover
 				background-color: $poseidon
-				color: $ceramic
 				cursor: pointer
 
-			&.selected
-				background-color: $grass
-				color: $ceramic
+			a,
+			a:hover,
+			a:visited
+				color: $sky
+				display: block
+				height: 100%
+				text-decoration: none
+				width: 100%
 
-				&:hover
-					background-color: $lime
-					color: $charcoal
+			a:hover
+				color: $ceramic
 
 	.badge
 		background-color: $slate
-		// border-radius: 4px 0 0 4px
 		border-radius: $borderRad
 		color: $ceramic
 		display: inline-block

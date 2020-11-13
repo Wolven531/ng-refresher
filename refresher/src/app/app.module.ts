@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
@@ -23,6 +24,7 @@ import { MessagesComponent } from './messages/messages.component'
 		BrowserModule,
 		FormsModule,
 		AppRoutingModule,
+		HttpClientModule,
 	],
 	providers: [],
 })

@@ -11,7 +11,7 @@ import { MessageService } from './message.service'
 export class HeroService {
 	private static ENDPOINT_HEROES = 'api/heroes'
 	private static MSG_HERO_FETCHED = 'hero fetched'
-	private static MSG_HEROES_FETCHED = 'all heroes fetched'
+	// private static MSG_HEROES_FETCHED = 'all heroes fetched'
 
 	constructor(
 		private readonly net: HttpClient,
@@ -26,9 +26,8 @@ export class HeroService {
 	}
 
 	getHeroes(): Observable<Hero[]> {
-		this.log(HeroService.MSG_HEROES_FETCHED)
-
-		return of(HEROES)
+		// this.log(HeroService.MSG_HEROES_FETCHED)
+		return this.net.get<Hero[]>(HeroService.ENDPOINT_HEROES)
 	}
 
 	private log(message: string): void {

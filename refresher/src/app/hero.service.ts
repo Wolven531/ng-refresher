@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of } from 'rxjs'
 import { Hero } from '../app/hero.interface'
@@ -8,23 +9,29 @@ import { MessageService } from './message.service'
 	providedIn: 'root',
 })
 export class HeroService {
-	private static MSG_HERO_FETCHED = '[ HeroService ] hero fetched'
-	private static MSG_HEROES_FETCHED = '[ HeroService ] all heroes fetched'
+	private static ENDPOINT_HEROES = 'api/heroes'
+	private static MSG_HERO_FETCHED = 'hero fetched'
+	private static MSG_HEROES_FETCHED = 'all heroes fetched'
 
 	constructor(
+		private readonly net: HttpClient,
 		private readonly messageService: MessageService,
 	) { }
 
 	getHero(id: number): Observable<Hero> {
 		// TODO - send message **after** fetching hero
-		this.messageService.add(`${HeroService.MSG_HERO_FETCHED}, id=${id}`)
+		this.log(`${HeroService.MSG_HERO_FETCHED}, id=${id}`)
 
 		return of(HEROES.find(hero => hero.id === id))
 	}
 
 	getHeroes(): Observable<Hero[]> {
-		this.messageService.add(HeroService.MSG_HEROES_FETCHED)
+		this.log(HeroService.MSG_HEROES_FETCHED)
 
 		return of(HEROES)
+	}
+
+	private log(message: string): void {
+		this.messageService.add(`[ HeroService ] ${message}`)
 	}
 }

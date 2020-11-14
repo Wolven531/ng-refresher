@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of } from 'rxjs'
+import { catchError } from 'rxjs/operators'
 import { Hero } from '../app/hero.interface'
 import { HEROES } from '../mock-heroes'
 import { MessageService } from './message.service'
@@ -28,6 +29,27 @@ export class HeroService {
 	getHeroes(): Observable<Hero[]> {
 		// this.log(HeroService.MSG_HEROES_FETCHED)
 		return this.net.get<Hero[]>(HeroService.ENDPOINT_HEROES)
+			.pipe(
+				catchError(this.handleError<Hero[]>('getHeroes', [])),
+			)
+	}
+
+	/**
+	 * Handle Http operation that failed; allows app to continue
+	 *
+	 * @param operation - name of the operation that failed
+	 * @param result - optional value to return as the observable result
+	 */
+	private handleError<T>(operation = 'operation', result?: T): (err: any) => Observable<T> {
+		return (error: any): Observable<T> => {
+			// TODO: send the error to remote logging infrastructure
+			console.error(error)
+
+			// TODO: better job of transforming error for user consumption
+			this.log(`[ HeroService ] ${operation} failed - ${error.message}`)
+
+			return of(result)
+		}
 	}
 
 	private log(message: string): void {

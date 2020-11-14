@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of } from 'rxjs'
-import { catchError } from 'rxjs/operators'
+import { catchError, tap } from 'rxjs/operators'
 import { Hero } from '../app/hero.interface'
-import { HEROES } from '../mock-heroes'
 import { MessageService } from './message.service'
 
 @Injectable({
@@ -12,7 +11,7 @@ import { MessageService } from './message.service'
 export class HeroService {
 	private static ENDPOINT_HEROES = 'api/heroes'
 	private static MSG_HERO_FETCHED = 'hero fetched'
-	// private static MSG_HEROES_FETCHED = 'all heroes fetched'
+	private static MSG_HEROES_FETCHED = 'all heroes fetched'
 
 	constructor(
 		private readonly net: HttpClient,
@@ -20,16 +19,17 @@ export class HeroService {
 	) { }
 
 	getHero(id: number): Observable<Hero> {
-		// TODO - send message **after** fetching hero
-		this.log(`${HeroService.MSG_HERO_FETCHED}, id=${id}`)
-
-		return of(HEROES.find(hero => hero.id === id))
+		return this.net.get<Hero>(`${HeroService.ENDPOINT_HEROES}/${id}`)
+			.pipe(
+				tap(_ => this.log(`${HeroService.MSG_HERO_FETCHED}, id=${id}`)),
+				catchError(this.handleError<Hero>(`getHero id=${id}`)),
+			)
 	}
 
 	getHeroes(): Observable<Hero[]> {
-		// this.log(HeroService.MSG_HEROES_FETCHED)
 		return this.net.get<Hero[]>(HeroService.ENDPOINT_HEROES)
 			.pipe(
+				tap(_ => this.log(HeroService.MSG_HEROES_FETCHED)),
 				catchError(this.handleError<Hero[]>('getHeroes', [])),
 			)
 	}

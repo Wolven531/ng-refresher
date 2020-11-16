@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, of } from 'rxjs'
 import { catchError, tap } from 'rxjs/operators'
@@ -11,7 +11,14 @@ import { MessageService } from './message.service'
 export class HeroService {
 	private static ENDPOINT_HEROES = 'api/heroes'
 	private static MSG_HERO_FETCHED = 'hero fetched'
+	private static MSG_HERO_UPDATED = 'updated hero'
 	private static MSG_HEROES_FETCHED = 'all heroes fetched'
+
+	private httpOptions = {
+		headers: new HttpHeaders({
+			'Content-Type': 'application/json',
+		}),
+	}
 
 	constructor(
 		private readonly net: HttpClient,
@@ -31,6 +38,14 @@ export class HeroService {
 			.pipe(
 				tap(_ => this.log(HeroService.MSG_HEROES_FETCHED)),
 				catchError(this.handleError<Hero[]>('getHeroes', [])),
+			)
+	}
+
+	updateHero(hero: Hero): Observable<any> {
+		return this.net.put(HeroService.ENDPOINT_HEROES, hero, this.httpOptions)
+			.pipe(
+				tap(_ => this.log(`${HeroService.MSG_HERO_UPDATED} id=${hero.id}`)),
+				catchError(this.handleError<any>('updateHero')),
 			)
 	}
 

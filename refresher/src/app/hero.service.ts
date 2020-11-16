@@ -10,6 +10,7 @@ import { MessageService } from './message.service'
 })
 export class HeroService {
 	private static ENDPOINT_HEROES = 'api/heroes'
+	private static MSG_HERO_ADDED = 'hero added'
 	private static MSG_HERO_FETCHED = 'hero fetched'
 	private static MSG_HERO_UPDATED = 'updated hero'
 	private static MSG_HEROES_FETCHED = 'all heroes fetched'
@@ -24,6 +25,14 @@ export class HeroService {
 		private readonly net: HttpClient,
 		private readonly messageService: MessageService,
 	) { }
+
+	addHero(hero: Hero): Observable<Hero> {
+		return this.net.post<Hero>(HeroService.ENDPOINT_HEROES, hero, this.httpOptions)
+			.pipe(
+				tap(newHero => this.log(`${HeroService.MSG_HERO_ADDED} w/ id=${newHero.id}`)),
+				catchError(this.handleError<Hero>('addHero')),
+			)
+	}
 
 	getHero(id: number): Observable<Hero> {
 		return this.net.get<Hero>(`${HeroService.ENDPOINT_HEROES}/${id}`)

@@ -11,6 +11,7 @@ import { MessageService } from './message.service'
 export class HeroService {
 	private static ENDPOINT_HEROES = 'api/heroes'
 	private static MSG_HERO_ADDED = 'hero added'
+	private static MSG_HERO_DELETED = 'hero deleted'
 	private static MSG_HERO_FETCHED = 'hero fetched'
 	private static MSG_HERO_UPDATED = 'updated hero'
 	private static MSG_HEROES_FETCHED = 'all heroes fetched'
@@ -31,6 +32,19 @@ export class HeroService {
 			.pipe(
 				tap(newHero => this.log(`${HeroService.MSG_HERO_ADDED} w/ id=${newHero.id}`)),
 				catchError(this.handleError<Hero>('addHero')),
+			)
+	}
+
+	deleteHero(heroOrId: Hero | number): Observable<Hero> {
+		const heroId = typeof heroOrId === 'number'
+			? heroOrId
+			: heroOrId.id
+		const url = `${HeroService.ENDPOINT_HEROES}/${heroId}`
+
+		return this.net.delete<Hero>(`${HeroService.ENDPOINT_HEROES}/${heroId}`, this.httpOptions)
+			.pipe(
+				tap(_ => this.log(`${HeroService.MSG_HERO_DELETED}, id=${heroId}`)),
+				catchError(this.handleError<Hero>('deleteHero')),
 			)
 	}
 

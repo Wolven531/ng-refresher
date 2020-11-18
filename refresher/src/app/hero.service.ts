@@ -15,6 +15,8 @@ export class HeroService {
 	private static MSG_HERO_FETCHED = 'hero fetched'
 	private static MSG_HERO_UPDATED = 'updated hero'
 	private static MSG_HEROES_FETCHED = 'all heroes fetched'
+	private static MSG_HEROES_FOUND = 'found heroes'
+	private static MSG_HEROES_NOT_FOUND = 'no heroes found'
 
 	private httpOptions = {
 		headers: new HttpHeaders({
@@ -61,6 +63,25 @@ export class HeroService {
 			.pipe(
 				tap(_ => this.log(HeroService.MSG_HEROES_FETCHED)),
 				catchError(this.handleError<Hero[]>('getHeroes', [])),
+			)
+	}
+
+	searchHeroes(query: string): Observable<Hero[]> {
+		query = query.trim()
+
+		if (query.length < 1) {
+			return of([])
+		}
+
+		return this.net.get<Hero[]>(`${HeroService.ENDPOINT_HEROES}/?name=${query}`)
+			.pipe(
+				tap(x =>
+					this.log(x.length > 0
+						? `${HeroService.MSG_HEROES_FOUND}, query="${query}"`
+						: `${HeroService.MSG_HEROES_NOT_FOUND}, query="${query}"`
+					)
+				),
+				catchError(this.handleError<Hero[]>('searchheroes', [])),
 			)
 	}
 

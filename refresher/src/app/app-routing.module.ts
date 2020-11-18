@@ -28,7 +28,7 @@ const routes: Routes = [
 	declarations: [],
 	exports: [RouterModule],
 	imports: [
-		RouterModule.forRoot(routes),
+		RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
 	],
 })
 export class AppRoutingModule { }

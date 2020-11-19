@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { InMemoryDbService, RequestInfo } from 'angular-in-memory-web-api'
 import { Observable } from 'rxjs'
 import { HEROES } from '../mock-heroes'
-import { Hero } from './hero.interface'
+import { Hero } from './hero/hero.interface'
 
 @Injectable({
 	providedIn: 'root'

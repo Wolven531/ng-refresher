@@ -7,9 +7,7 @@ import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { CapitalizePipe } from './capitalize.pipe'
 import { DashboardComponent } from './dashboard/dashboard.component'
-import { HeroDetailComponent } from './hero-detail/hero-detail.component'
-import { HeroSearchComponent } from './hero-search/hero-search.component'
-import { HeroesComponent } from './heroes/heroes.component'
+import { HeroModule } from './hero/hero.module'
 import { InMemoryDataService } from './in-memory-data.service'
 import { MessagesComponent } from './messages/messages.component'
 
@@ -18,9 +16,6 @@ import { MessagesComponent } from './messages/messages.component'
 	declarations: [
 		AppComponent,
 		DashboardComponent,
-		HeroesComponent,
-		HeroDetailComponent,
-		HeroSearchComponent,
 		MessagesComponent,
 		CapitalizePipe,
 	],
@@ -37,6 +32,7 @@ import { MessagesComponent } from './messages/messages.component'
 			InMemoryDataService,
 			{ dataEncapsulation: false }
 		),
+		HeroModule,
 	],
 	providers: [],
 })

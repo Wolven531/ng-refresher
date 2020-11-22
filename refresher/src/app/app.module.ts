@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
-import { CapitalizePipe } from './capitalize.pipe'
+import { ApplicationPipesModule } from './application-pipes/application-pipes.module'
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { HeroModule } from './hero/hero.module'
 import { InMemoryDataService } from './in-memory-data.service'
@@ -17,7 +17,6 @@ import { MessagesComponent } from './messages/messages.component'
 		AppComponent,
 		DashboardComponent,
 		MessagesComponent,
-		CapitalizePipe,
 	],
 	imports: [
 		AppRoutingModule,
@@ -32,6 +31,7 @@ import { MessagesComponent } from './messages/messages.component'
 			InMemoryDataService,
 			{ dataEncapsulation: false }
 		),
+		ApplicationPipesModule,
 		HeroModule,
 	],
 	providers: [],

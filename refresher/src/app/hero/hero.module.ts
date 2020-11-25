@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
+import { AppRoutingModule } from '../app-routing.module'
 import { ApplicationPipesModule } from '../application-pipes/application-pipes.module'
 import { MessageService } from '../message.service'
 import { HeroDetailComponent } from './hero-detail/hero-detail.component'
@@ -19,6 +20,7 @@ import { HeroesComponent } from './heroes/heroes.component'
 		HeroSearchComponent,
 	],
 	imports: [ // import BrowserModule once, CommonModule everywhere else
+		AppRoutingModule,
 		CommonModule,
 		ApplicationPipesModule,
 	],

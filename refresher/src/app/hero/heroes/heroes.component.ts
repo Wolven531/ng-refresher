@@ -12,7 +12,9 @@ export class HeroesComponent implements OnInit {
 
 	constructor(
 		private readonly heroService: HeroService,
-	) { }
+	) {
+		this.heroes = []
+	}
 
 	addHero(name: string): void {
 		name = name.trim()

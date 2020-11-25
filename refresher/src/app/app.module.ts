@@ -19,7 +19,6 @@ import { MessagesComponent } from './messages/messages.component'
 		MessagesComponent,
 	],
 	imports: [
-		AppRoutingModule,
 		BrowserModule,
 		FormsModule,
 		HttpClientModule,
@@ -31,6 +30,7 @@ import { MessagesComponent } from './messages/messages.component'
 			InMemoryDataService,
 			{ dataEncapsulation: false }
 		),
+		AppRoutingModule,
 		ApplicationPipesModule,
 		HeroModule,
 	],

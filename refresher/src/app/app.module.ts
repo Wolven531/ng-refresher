@@ -7,9 +7,14 @@ import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { ApplicationPipesModule } from './application-pipes/application-pipes.module'
 import { DashboardComponent } from './dashboard/dashboard.component'
-import { HeroModule } from './hero/hero.module'
+import { HeroDetailComponent } from './hero-detail/hero-detail.component'
+import { HeroSearchComponent } from './hero-search/hero-search.component'
+import { HeroService } from './hero.service'
+import { HeroesComponent } from './heroes/heroes.component'
 import { InMemoryDataService } from './in-memory-data.service'
 import { MessagesComponent } from './messages/messages.component'
+
+// import { HeroModule } from './hero/hero.module'
 
 @NgModule({
 	bootstrap: [AppComponent],
@@ -17,6 +22,9 @@ import { MessagesComponent } from './messages/messages.component'
 		AppComponent,
 		DashboardComponent,
 		MessagesComponent,
+		HeroDetailComponent,
+		HeroSearchComponent,
+		HeroesComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -32,8 +40,10 @@ import { MessagesComponent } from './messages/messages.component'
 		),
 		AppRoutingModule,
 		ApplicationPipesModule,
-		HeroModule,
+		// HeroModule,
 	],
-	providers: [],
+	providers: [
+		HeroService,
+	],
 })
 export class AppModule { }

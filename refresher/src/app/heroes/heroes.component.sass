@@ -7,8 +7,10 @@ $ceramic: #eee
 $charcoal: #333
 $dust: #bbb
 $grass: #0a0
+$lemon: #ee2
 $lime: #0f0
 $poseidon: #077
+$scarlett: #b33
 $seafoam: #0a6
 $sky: #06a
 $slate: #456
@@ -43,15 +45,16 @@ $slate: #456
 			line-height: 1em
 			list-style-type: none
 			margin: $spaceSmall
+			position: relative
 			vertical-align: middle
 
 			&:hover
-				background-color: $poseidon
 				cursor: pointer
 
 			a,
 			a:hover,
 			a:visited
+				border-radius: $borderRad
 				color: $sky
 				display: block
 				height: 100%
@@ -59,12 +62,27 @@ $slate: #456
 				width: 100%
 
 			a:hover
+				background-color: $poseidon
 				color: $ceramic
+
+			button.delete
+				border-radius: $borderRad
+				border-width: 1px
+				position: absolute
+				right: 5px
+				top: 5px
+				z-index: 3
+
+				&:hover
+					background-color: $scarlett
+					color: $lemon
+					// cursor: url("/assets/icon_delete.svg"), pointer
 
 	.badge
 		background-color: $slate
 		border-radius: $borderRad
 		color: $ceramic
+		// cursor: default
 		display: inline-block
 		font-size: .8em
 		line-height: 1em

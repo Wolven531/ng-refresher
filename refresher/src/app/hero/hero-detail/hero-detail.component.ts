@@ -39,7 +39,23 @@ export class HeroDetailComponent implements OnInit {
 
 	loadHero(): void {
 		console.log('[ HeroDetail | loadHero ]')
+
+		/*
+		this.route.params.pipe(
+				map(p => parseInt(p.id, 10)),
+			)
+			.subscribe(id => {
+				console.log(`[ HeroDetail | loadHero ] id="${id}"`)
+
+				this.heroService.getHero(id)
+					.subscribe(h => {
+						console.log(`[ HeroDetail | loadHero | callback ] h.name="${h.name}"`)
+						this.hero = h
+					})
+			})
+		*/
 		const id = parseInt(this.route.snapshot.paramMap.get('id'), 10)
+		console.log(`[ HeroDetail | loadHero ] id="${id}"`)
 
 		this.heroService.getHero(id)
 			.subscribe(h => {

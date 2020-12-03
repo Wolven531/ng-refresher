@@ -1,8 +1,10 @@
 import { Location } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { Hero } from '../hero.interface'
 import { HeroService } from '../../hero.service'
+import { Hero } from '../hero.interface'
+
+const TOKEN = 'HeroDetail'
 
 @Component({
 	selector: 'app-hero-detail',
@@ -10,10 +12,6 @@ import { HeroService } from '../../hero.service'
 	templateUrl: './hero-detail.component.html',
 })
 export class HeroDetailComponent implements OnInit {
-	// @Input() hero: Hero = {
-	// 	id: -1,
-	// 	name: 'default',
-	// }
 	hero: Hero
 
 	constructor(
@@ -21,52 +19,37 @@ export class HeroDetailComponent implements OnInit {
 		private route: ActivatedRoute,
 		private heroService: HeroService,
 	) {
-		console.log('[ HeroDetail | ctor ]')
-		// this.hero = {
-		// 	id: -1,
-		// 	name: 'default',
-		// }
-	}
-
-	goBack(): void {
-		this.location.back()
+		console.info(`[ ${TOKEN} | ctor ]`)
 	}
 
 	ngOnInit(): void {
-		console.log('[ HeroDetail | ngOnInit ]')
+		console.info(`[ ${TOKEN} | ngOnInit ]`)
 		this.loadHero()
 	}
 
-	loadHero(): void {
-		console.log('[ HeroDetail | loadHero ]')
-
-		/*
-		this.route.params.pipe(
-				map(p => parseInt(p.id, 10)),
-			)
-			.subscribe(id => {
-				console.log(`[ HeroDetail | loadHero ] id="${id}"`)
-
-				this.heroService.getHero(id)
-					.subscribe(h => {
-						console.log(`[ HeroDetail | loadHero | callback ] h.name="${h.name}"`)
-						this.hero = h
-					})
-			})
-		*/
-		const id = parseInt(this.route.snapshot.paramMap.get('id'), 10)
-		console.log(`[ HeroDetail | loadHero ] id="${id}"`)
-
-		this.heroService.getHero(id)
-			.subscribe(h => {
-				console.log(`[ HeroDetail | loadHero | callback ] h.name="${h.name}"`)
-				this.hero = h
-				console.log(`[ HeroDetail | loadHero | callback ] this.hero.name="${this.hero.name}"`)
-			})
+	goBack(): void {
+		console.info(`[ ${TOKEN} | goBack ]`)
+		this.location.back()
 	}
 
 	save(): void {
+		console.info(`[ ${TOKEN} | save ]`)
+
 		this.heroService.updateHero(this.hero)
-			.subscribe(() => this.goBack())
+			.subscribe()
+	}
+
+	private loadHero(): void {
+		const sig = `[ ${TOKEN} | loadHero ]`
+		console.info(sig)
+
+		const id = parseInt(this.route.snapshot.paramMap.get('id'), 10)
+		console.info(`${sig} parsed from route, id="${id}"`)
+
+		this.heroService.getHero(id)
+			.subscribe(h => {
+				console.info(`${sig} callback, h.name="${h.name}"`)
+				this.hero = h
+			})
 	}
 }

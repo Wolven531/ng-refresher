@@ -61,6 +61,7 @@ export class HeroDetailComponent implements OnInit {
 			.subscribe(h => {
 				console.log(`[ HeroDetail | loadHero | callback ] h.name="${h.name}"`)
 				this.hero = h
+				console.log(`[ HeroDetail | loadHero | callback ] this.hero.name="${this.hero.name}"`)
 			})
 	}
 

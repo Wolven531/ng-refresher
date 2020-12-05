@@ -1,4 +1,8 @@
+import { CommonModule } from '@angular/common'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
+import { FormsModule } from '@angular/forms'
+import { ApplicationPipesModule } from 'src/app/application-pipes/application-pipes.module'
+import { HeroService } from 'src/app/hero.service'
 import { HeroSearchComponent } from './hero-search.component'
 
 describe('HeroSearchComponent', () => {
@@ -7,18 +11,28 @@ describe('HeroSearchComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [HeroSearchComponent]
+			declarations: [
+				HeroSearchComponent,
+			],
+			imports: [
+				CommonModule,
+				FormsModule,
+				ApplicationPipesModule,
+			],
+			providers: [
+				{
+					provide: HeroService,
+					useClass: HeroService
+				},
+			],
 		})
 			.compileComponents()
-	})
 
-	beforeEach(() => {
 		fixture = TestBed.createComponent(HeroSearchComponent)
 		component = fixture.componentInstance
-		fixture.detectChanges()
 	})
 
-	it('should create', () => {
+	it('creates component', () => {
 		expect(component).toBeTruthy()
 	})
 })

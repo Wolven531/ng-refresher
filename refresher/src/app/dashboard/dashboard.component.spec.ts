@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { FormsModule } from '@angular/forms'
+import { of } from 'rxjs'
 import { ApplicationPipesModule } from '../application-pipes/application-pipes.module'
 import { HeroService } from '../hero.service'
 import { Hero } from '../hero/hero.interface'
@@ -24,8 +25,8 @@ describe('DashboardComponent', () => {
 				{
 					provide: HeroService,
 					useValue: {
-						getHeroes: jasmine.createSpy().and.returnValue([] as Hero[]),
-					}
+						getHeroes: jasmine.createSpy().and.returnValue(of([] as Hero[])),
+					},
 				},
 			],
 		})

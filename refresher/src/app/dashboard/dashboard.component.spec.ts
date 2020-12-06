@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { FormsModule } from '@angular/forms'
 import { ApplicationPipesModule } from '../application-pipes/application-pipes.module'
 import { HeroService } from '../hero.service'
+import { Hero } from '../hero/hero.interface'
 import { DashboardComponent } from './dashboard.component'
 
 describe('DashboardComponent', () => {
@@ -22,7 +23,9 @@ describe('DashboardComponent', () => {
 			providers: [
 				{
 					provide: HeroService,
-					useClass: HeroService
+					useValue: {
+						getHeroes: jasmine.createSpy().and.returnValue([] as Hero[]),
+					}
 				},
 			],
 		})

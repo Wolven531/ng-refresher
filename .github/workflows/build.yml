@@ -17,4 +17,4 @@ jobs:
     - uses: actions/setup-node@v1
       name: Setup node
       with:
-        version: '12'
+        node-version: '12'

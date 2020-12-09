@@ -3,18 +3,25 @@ name: Basic NodeJS build
 on: push
 jobs:
   build:
-    name: Install NodeJS deps and repo source code
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node: ['12']
+    name: Install NodeJS deps, source code, and run tests
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/cache@v2
+    - name: Checkout repository source code
+      uses: actions/checkout@v2
+
+    - name: Cache NPM directory for faster future builds
+      uses: actions/cache@v2
       with:
         path: |
           ~/.npm
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - uses: actions/setup-node@v1
-      name: Setup node
+
+    - name: Setup node
+      uses: actions/setup-node@v1
       with:
-        node-version: '12'
+        node-version: ${{ matrix.node }}

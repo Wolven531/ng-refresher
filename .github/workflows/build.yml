@@ -27,7 +27,9 @@ jobs:
         node-version: ${{ matrix.node }}
 
     - name: Install deps
+      working-directory: refresher
       run: npm install
 
     - name: Run unit tests
+      working-directory: refresher
       run: npm test

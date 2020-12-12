@@ -7,13 +7,19 @@ module.exports = function (config) {
 		basePath: '',
 		browsers: ['Chrome'],
 		client: {
-			clearContext: false // leave Jasmine Spec Runner output visible in browser
+			clearContext: false, // leave Jasmine Spec Runner output visible in browser
 		},
 		colors: true,
 		coverageIstanbulReporter: {
 			dir: require('path').join(__dirname, './coverage/refresher'),
 			fixWebpackSourcePaths: true,
 			reports: ['html', 'lcovonly', 'text-summary'],
+			thresholds: {
+				branches: 0,
+				functions: 0,
+				lines: 0,
+				statements: 0,
+			},
 		},
 		customLaunchers: {
 			ChromeHeadlessCustom: {

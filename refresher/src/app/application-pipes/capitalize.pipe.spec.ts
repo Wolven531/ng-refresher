@@ -4,6 +4,10 @@ describe('CapitalizePipe', () => {
 	// pipe is a pure, stateless function - no need for beforeEach
 	const pipe = new CapitalizePipe()
 
+	it('handles empty string', () => {
+		expect(pipe.transform('')).toBe('')
+	})
+
 	it('handles single word (all lowercase)', () => {
 		expect(pipe.transform('abc')).toBe('Abc')
 	})

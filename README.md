@@ -9,3 +9,9 @@
 * To add routing, `ng generate module app-routing --flat --module=app` ([more info](https://angular.io/tutorial/toh-pt5#add-the-approutingmodule))
     * `--flat` puts the file in `src/app` instead of its own folder
     * `--module=app` tells the CLI to register it in the imports array of the **App**Module
+
+## Testing
+
+* Run `npm test` to run all tests
+* Run `npm run test:coverage` to run tests with code coverage collection
+* Run `npm run test:watch` to run tests while developing and re-execute on code change

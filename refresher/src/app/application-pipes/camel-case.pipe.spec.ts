@@ -8,9 +8,9 @@ describe('CamelCasePipe', () => {
 		expect(pipe.transform('')).toBe('')
 	})
 
-	// it('handles single word (all uppercase)', () => {
-	// 	expect(pipe.transform('ABC')).toBe('aBC')
-	// })
+	it('handles single word (all uppercase)', () => {
+		expect(pipe.transform('ABC')).toBe('aBC')
+	})
 
 	// it('handles strings w/ spaces (mixed casing)', () => {
 	// 	expect(pipe.transform('hello SWEET wOrLd')).toBe('helloSweetWorld')

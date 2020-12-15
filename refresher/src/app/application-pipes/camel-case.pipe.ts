@@ -20,12 +20,17 @@ export class CamelCasePipe implements PipeTransform {
 
 		return value.split(' ')
 			.map((word, ind) => {
-				if (ind === 0) {
-					return word.toLocaleLowerCase()
+				if (word.length < 1) {
+					return word
 				}
 
 				const firstAfterCap = word[0].toUpperCase()
+				const firstAfterLower = word[0].toLowerCase()
 				const restOfString = word.substr(1)
+
+				if (ind === 0) {
+					return `${firstAfterLower}${restOfString}`
+				}
 
 				return `${firstAfterCap}${restOfString}`
 			})

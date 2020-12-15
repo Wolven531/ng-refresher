@@ -24,13 +24,15 @@ export class CamelCasePipe implements PipeTransform {
 					return word
 				}
 
-				const firstAfterCap = word[0].toUpperCase()
-				const firstAfterLower = word[0].toLowerCase()
 				const restOfString = word.substr(1)
 
 				if (ind === 0) {
+					const firstAfterLower = word[0].toLowerCase()
+
 					return `${firstAfterLower}${restOfString}`
 				}
+
+				const firstAfterCap = word[0].toUpperCase()
 
 				return `${firstAfterCap}${restOfString}`
 			})

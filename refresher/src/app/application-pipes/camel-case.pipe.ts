@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core'
+import { CapitalizePipe } from './capitalize.pipe'
 
 /**
- * Convert a string or phrase to camel case (remove sapces, capitalize every word after first)
+ * Convert a string or phrase to camel case (remove sapces, capitalize every word after first). Uses CapitalizePipe
  *
  * Usage:
  *    value | camel-case
@@ -11,6 +12,12 @@ import { Pipe, PipeTransform } from '@angular/core'
 */
 @Pipe({ name: 'camel-case' })
 export class CamelCasePipe implements PipeTransform {
+	private pipe: CapitalizePipe
+
+	constructor() {
+		this.pipe = new CapitalizePipe()
+	}
+
 	transform(value: string): string {
 		value = value || ''
 
@@ -24,17 +31,11 @@ export class CamelCasePipe implements PipeTransform {
 					return word
 				}
 
-				const restOfString = word.substr(1)
-
 				if (ind === 0) {
-					const firstAfterLower = word[0].toLowerCase()
-
-					return `${firstAfterLower}${restOfString}`
+					return word.toLowerCase()
 				}
 
-				const firstAfterCap = word[0].toUpperCase()
-
-				return `${firstAfterCap}${restOfString}`
+				return this.pipe.transform(word)
 			})
 			.join('')
 	}

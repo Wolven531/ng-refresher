@@ -8,10 +8,6 @@ describe('CapitalizePipe', () => {
 		expect(pipe.transform('')).toBe('')
 	})
 
-	it('handles single word (all lowercase)', () => {
-		expect(pipe.transform('abc')).toBe('Abc')
-	})
-
 	it('handles single word (mixed casing)', () => {
 		expect(pipe.transform('aBcDe')).toBe('Abcde')
 	})

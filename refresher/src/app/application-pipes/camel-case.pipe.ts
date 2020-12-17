@@ -19,18 +19,14 @@ export class CamelCasePipe implements PipeTransform {
 	}
 
 	transform(value: string): string {
-		value = value || ''
+		value = (value || '').trim()
 
 		if (value.length < 1) {
 			return value
 		}
 
-		return value.split(' ')
+		return value.split(/\s/g)
 			.map((word, ind) => {
-				if (word.length < 1) {
-					return word
-				}
-
 				if (ind === 0) {
 					return word.toLowerCase()
 				}

@@ -1,13 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core'
 
 /**
- * Make the first letter of a string capital
+ * Make the first letter of a string capital, and the rest of it lowercase
  *
  * Usage:
  *    value | capitalize
  *
  * Example:
- *    {{ 'hello' | capitalize }} // formats to 'Hello'
+ *    {{ 'hElLo' | capitalize }} // formats to 'Hello'
 */
 @Pipe({ name: 'capitalize' })
 export class CapitalizePipe implements PipeTransform {
@@ -19,8 +19,8 @@ export class CapitalizePipe implements PipeTransform {
 		}
 
 		const firstAfterCap = value[0].toUpperCase()
-		const restOfString = value.substr(1)
+		const restOfStringLower = value.substr(1).toLowerCase()
 
-		return `${firstAfterCap}${restOfString}`
+		return `${firstAfterCap}${restOfStringLower}`
 	}
 }

@@ -12,15 +12,15 @@ import { Pipe, PipeTransform } from '@angular/core'
 @Pipe({ name: 'capitalize' })
 export class CapitalizePipe implements PipeTransform {
 	transform(value: string): string {
-		value = value || ''
+		value = (value || '').trim()
 
 		if (value.length < 1) {
 			return value
 		}
 
-		const firstAfterCap = value[0].toUpperCase()
+		const firstCapitalized = value[0].toUpperCase()
 		const restOfStringLower = value.substr(1).toLowerCase()
 
-		return `${firstAfterCap}${restOfStringLower}`
+		return `${firstCapitalized}${restOfStringLower}`
 	}
 }

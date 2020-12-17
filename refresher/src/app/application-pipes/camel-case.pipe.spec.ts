@@ -8,11 +8,11 @@ describe('CamelCasePipe', () => {
 		expect(pipe.transform('')).toBe('')
 	})
 
-	it('handles single word (all uppercase)', () => {
-		expect(pipe.transform('ABC')).toBe('abc')
+	it('handles single word (mixed casing)', () => {
+		expect(pipe.transform('AbCd')).toBe('abcd')
 	})
 
-	// it('handles strings w/ spaces (mixed casing)', () => {
-	// 	expect(pipe.transform('hello SWEET wOrLd')).toBe('helloSweetWorld')
-	// })
+	it('handles strings w/ spaces (mixed casing)', () => {
+		expect(pipe.transform('hello SWEET wOrLd')).toBe('helloSweetWorld')
+	})
 })

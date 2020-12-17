@@ -13,10 +13,10 @@ describe('CapitalizePipe', () => {
 	})
 
 	it('handles single word (mixed casing)', () => {
-		expect(pipe.transform('aBcD')).toBe('Abcd')
+		expect(pipe.transform('aBcDe')).toBe('Abcde')
 	})
 
-	it('handles strings w/ spaces (all lowercase)', () => {
-		expect(pipe.transform('abc def')).toBe('Abc def')
+	it('handles strings w/ spaces (mixed casing)', () => {
+		expect(pipe.transform('aBc DeF')).toBe('Abc def')
 	})
 })

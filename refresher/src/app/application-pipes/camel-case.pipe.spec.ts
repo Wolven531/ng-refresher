@@ -12,6 +12,14 @@ describe('CamelCasePipe', () => {
 		expect(pipe.transform('AbCd')).toBe('abcd')
 	})
 
+	it('handles single word (upper case) padded w/ one space', () => {
+		expect(pipe.transform(' ABCD ')).toBe('abcd')
+	})
+
+	it('handles single word (upper case) padded w/ one tab and five spaces', () => {
+		expect(pipe.transform('     \tABCD\t     ')).toBe('abcd')
+	})
+
 	it('handles strings w/ spaces (mixed casing)', () => {
 		expect(pipe.transform('hello SWEET wOrLd')).toBe('helloSweetWorld')
 	})

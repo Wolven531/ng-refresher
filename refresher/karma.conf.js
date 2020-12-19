@@ -11,16 +11,42 @@ module.exports = function (config) {
 			clearContext: false, // leave Jasmine Spec Runner output visible in browser
 		},
 		colors: true,
-		coverageIstanbulReporter: {
-			dir: require('path').join(__dirname, 'coverage', 'refresher'),
-			fixWebpackSourcePaths: true,
-			reports: ['html', 'lcovonly', 'text-summary'],
-			thresholds: {
-				branches: 25,
-				functions: 25,
-				lines: 25,
-				statements: 25,
-			},
+		coverageReporter: {
+			reporters: [
+				{
+					check: { // More info - https://github.com/karma-runner/karma-coverage/blob/master/docs/configuration.md#check
+						branches: 25,
+						excludes: [],
+						functions: 25,
+						lines: 25,
+						statements: 25,
+					},
+					dir: require('path').join(__dirname, 'coverage', 'refresher'),
+					type: 'html',
+					watermarks: { // first is start of yellow, second is start of green
+						branches: [ 50, 80 ],
+						functions: [ 50, 80 ],
+						lines: [ 50, 80 ],
+						statements: [ 50, 80 ],
+					},
+				},
+				{
+					check: {
+						branches: 25,
+						excludes: [],
+						functions: 25,
+						lines: 25,
+						statements: 25,
+					},
+					type: 'text-summary',
+					watermarks: { // first is start of yellow, second is start of green
+						branches: [ 50, 80 ],
+						functions: [ 50, 80 ],
+						lines: [ 50, 80 ],
+						statements: [ 50, 80 ],
+					},
+				},
+			],
 		},
 		customLaunchers: {
 			ChromeHeadlessCustom: {
@@ -34,11 +60,10 @@ module.exports = function (config) {
 			require('karma-jasmine'),
 			require('karma-chrome-launcher'),
 			require('karma-jasmine-html-reporter'),
-			require('karma-coverage-istanbul-reporter'),
 			require('@angular-devkit/build-angular/plugins/karma'),
 		],
 		port: 9876,
-		reporters: ['progress', 'kjhtml'],
+		// reporters: ['progress', 'html', 'text-summary'],
 		restartOnFileChange: true,
 		singleRun: false,
 	})

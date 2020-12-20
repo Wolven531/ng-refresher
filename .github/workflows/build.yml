@@ -13,13 +13,12 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Cache NPM directory for faster future builds
-      working-directory: refresher
       uses: actions/cache@v2
       with:
         path: |
           ~/.npm
-          **/node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          refresher/node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('refresher/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
 

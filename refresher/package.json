@@ -13,9 +13,8 @@
     "ng": "ng",
     "start": "ng serve --open",
     "start:headless": "ng serve",
-    "test": "ng test --watch=false --browsers=ChromeHeadlessCustom",
-    "test:coverage": "ng test --no-watch --code-coverage --browsers=ChromeHeadlessCustom",
-    "test:watch": "ng test"
+    "test": "ng test --browsers=ChromeHeadlessCustom --watch=true --reporters progress",
+    "test:coverage": "ng test --browsers=ChromeHeadlessCustom --watch=false --code-coverage"
   },
   "private": true,
   "dependencies": {

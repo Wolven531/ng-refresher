@@ -12,6 +12,5 @@
 
 ## Testing
 
-* Run `npm test` to run all tests
+* Run `npm test` to run all tests while developing and re-execute on code change
 * Run `npm run test:coverage` to run tests with code coverage collection
-* Run `npm run test:watch` to run tests while developing and re-execute on code change

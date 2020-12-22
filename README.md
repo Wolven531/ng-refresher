@@ -10,6 +10,11 @@
     * `--flat` puts the file in `src/app` instead of its own folder
     * `--module=app` tells the CLI to register it in the imports array of the **App**Module
 
+## Running
+
+* Run `npm start` to compile the code, start the webapp (locally), and launch the system default browser to the webapp's location
+* Run `npm run start:headless` to compile the code and start the webapp (locally)
+
 ## Testing
 
 * Run `npm test` to run all tests while developing and re-execute on code change

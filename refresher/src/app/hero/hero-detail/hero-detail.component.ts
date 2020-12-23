@@ -15,9 +15,9 @@ export class HeroDetailComponent implements OnInit {
 	hero: Hero
 
 	constructor(
-		private location: Location,
-		private route: ActivatedRoute,
-		private heroService: HeroService,
+		private readonly location: Location,
+		private readonly route: ActivatedRoute,
+		private readonly heroService: HeroService,
 	) {
 		console.info(`[ ${TOKEN} | ctor ]`)
 	}

@@ -24,10 +24,6 @@ module.exports = function (config) {
 						statements: 25,
 					},
 					dir: require('path').join(__dirname, 'coverage', 'refresher'),
-					exclude: [
-						'src/main.ts',
-						'src/mock-heroes.ts',
-					],
 					type: 'html',
 					watermarks: { // first is start of yellow, second is start of green
 						branches: [ 50, 80 ],
@@ -60,6 +56,10 @@ module.exports = function (config) {
 				flags: ['--no-sandbox', '--disable-gpu'],
 			}
 		},
+		exclude: [
+			'src/main.ts',
+			'src/mock-heroes.ts',
+		],
 		frameworks: ['jasmine', '@angular-devkit/build-angular'],
 		logLevel: config.LOG_INFO, // default val
 		plugins: [

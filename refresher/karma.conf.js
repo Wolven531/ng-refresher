@@ -61,6 +61,9 @@ module.exports = function (config) {
 			'**/mock-heroes.ts',
 			'**/test.ts',
 		],
+		files: [
+			'**/application-pipes/*.ts'
+		],
 		frameworks: ['jasmine', '@angular-devkit/build-angular'],
 		logLevel: config.LOG_INFO, // default val
 		plugins: [

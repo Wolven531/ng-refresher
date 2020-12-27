@@ -61,9 +61,7 @@ module.exports = function (config) {
 			'**/mock-heroes.ts',
 			'**/test.ts',
 		],
-		files: [
-			'**/application-pipes/*.ts'
-		],
+		files: [],
 		frameworks: ['jasmine', '@angular-devkit/build-angular'],
 		logLevel: config.LOG_INFO, // default val
 		plugins: [
@@ -74,6 +72,10 @@ module.exports = function (config) {
 			require('@angular-devkit/build-angular/plugins/karma'),
 		],
 		port: 9876, // default val
+		preprocessors: {
+			'src/**/*.ts': ['coverage'],
+			'src/**/!(*.spec).ts': ['coverage'],
+		},
 		restartOnFileChange:true,
 		retryLimit: 2, // default val
 		reporters: ['progress', 'coverage'],

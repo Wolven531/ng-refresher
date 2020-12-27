@@ -57,8 +57,9 @@ module.exports = function (config) {
 			}
 		},
 		exclude: [
-			'src/main.ts',
-			'src/mock-heroes.ts',
+			'**/main.ts',
+			'**/mock-heroes.ts',
+			'**/test.ts',
 		],
 		frameworks: ['jasmine', '@angular-devkit/build-angular'],
 		logLevel: config.LOG_INFO, // default val

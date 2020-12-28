@@ -78,6 +78,7 @@ module.exports = function (config) {
 		preprocessors: {
 			'src/**/*.ts': ['coverage'],
 			'src/**/!(*.spec).ts': ['coverage'],
+			'!src/mock-heroes.ts': ['coverage'],
 		},
 		restartOnFileChange:true,
 		retryLimit: 2, // default val

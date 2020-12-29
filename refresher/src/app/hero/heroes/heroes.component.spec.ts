@@ -10,8 +10,16 @@ import { HeroesComponent } from './heroes.component'
 describe('HeroesComponent', () => {
 	let component: HeroesComponent
 	let fixture: ComponentFixture<HeroesComponent>
+	let mockGetHeroes: jasmine.Spy
 
 	beforeEach(async () => {
+		mockGetHeroes = jasmine.createSpy().and.returnValue(
+			of([
+				{ id: 1, name: 'test name' } as Hero,
+				{ id: 2, name: 'test name 2' } as Hero,
+			])
+		)
+
 		await TestBed.configureTestingModule({
 			declarations: [
 				HeroesComponent,
@@ -25,11 +33,7 @@ describe('HeroesComponent', () => {
 				{
 					provide: HeroService,
 					useValue: {
-						getHeroes: jasmine.createSpy().and
-							.returnValue(of([
-								{ id: 1, name: 'test name' } as Hero,
-								{ id: 2, name: 'test name 2' } as Hero,
-							])),
+						getHeroes: mockGetHeroes,
 					},
 				},
 			],
@@ -42,5 +46,15 @@ describe('HeroesComponent', () => {
 
 	it('creates component', () => {
 		expect(component).toBeTruthy()
+	})
+
+	describe('after ngOnInit()', () => {
+		beforeEach(() => {
+			component.ngOnInit()
+		})
+
+		it('invokes HeroService.getHeroes()', () => {
+			expect(mockGetHeroes).toHaveBeenCalledTimes(1)
+		})
 	})
 })

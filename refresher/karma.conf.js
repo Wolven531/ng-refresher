@@ -23,7 +23,7 @@ module.exports = function (config) {
 						lines: 25,
 						statements: 25,
 					},
-					dir: require('path').join(__dirname, 'coverage', 'refresher'),
+					dir: require('path').join(__dirname, 'coverage'),
 					type: 'html',
 					watermarks: { // first is start of yellow, second is start of green
 						branches: [ 50, 80 ],
@@ -57,12 +57,12 @@ module.exports = function (config) {
 			}
 		},
 		exclude: [
-			'**/main.ts',
-			'**/mock-heroes.ts',
-			'**/test.ts',
-			'src/main.ts',
-			'src/mock-heroes.ts',
-			'src/test.ts',
+			// '**/main.ts',
+			// '**/mock-heroes.ts',
+			// '**/test.ts',
+			// 'src/main.ts',
+			// 'src/mock-heroes.ts',
+			// 'src/test.ts',
 		],
 		files: [],
 		frameworks: ['jasmine', '@angular-devkit/build-angular'],
@@ -76,9 +76,9 @@ module.exports = function (config) {
 		],
 		port: 9876, // default val
 		preprocessors: {
-			'src/**/*.ts': ['coverage'],
-			'src/**/!(*.spec).ts': ['coverage'],
-			'!src/mock-heroes.ts': ['coverage'],
+			// 'src/**/*.ts': ['coverage'],
+			// 'src/**/!(*.spec).ts': ['coverage'],
+			// '!src/mock-heroes.ts': ['coverage'],
 		},
 		restartOnFileChange:true,
 		retryLimit: 2, // default val

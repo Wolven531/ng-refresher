@@ -17,11 +17,11 @@ module.exports = function (config) {
 			reporters: [
 				{
 					check: { // More info - https://github.com/karma-runner/karma-coverage/blob/master/docs/configuration.md#check
-						branches: 25,
+						branches: 50,
 						excludes: [],
 						functions: 25,
-						lines: 25,
-						statements: 25,
+						lines: 50,
+						statements: 50,
 					},
 					dir: require('path').join(__dirname, 'coverage'),
 					type: 'html',
@@ -34,11 +34,11 @@ module.exports = function (config) {
 				},
 				{
 					check: {
-						branches: 25,
+						branches: 50,
 						excludes: [],
 						functions: 25,
-						lines: 25,
-						statements: 25,
+						lines: 50,
+						statements: 50,
 					},
 					type: 'text-summary',
 					watermarks: { // first is start of yellow, second is start of green

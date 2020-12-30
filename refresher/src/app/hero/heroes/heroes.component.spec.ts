@@ -75,6 +75,19 @@ describe('HeroesComponent', () => {
 				expect(mockDeleteHero).toHaveBeenCalledWith(MOCK_HERO_1)
 				expect(component.heroes).toEqual([MOCK_HERO_2])
 			})
+
+			describe('invoke deleteHero() w/ MOCK_HERO_1 again (no longer exists)', () => {
+				beforeEach(() => {
+					mockDeleteHero.calls.reset()
+
+					component.deleteHero(MOCK_HERO_1)
+				})
+
+				it('does NOT invoke HeroService.deleteHero(), leaves heroes unchanged', () => {
+					expect(mockDeleteHero).not.toHaveBeenCalled()
+					expect(component.heroes).toEqual([MOCK_HERO_2])
+				})
+			})
 		})
 	})
 })

@@ -92,7 +92,7 @@ describe('HeroesComponent', () => {
 				})
 			})
 
-			describe('invoke add() w/ MOCK_HERO_1', () => {
+			describe('invoke addHero() w/ MOCK_HERO_1 name', () => {
 				beforeEach(() => {
 					component.addHero(MOCK_HERO_1.name)
 				})
@@ -101,6 +101,17 @@ describe('HeroesComponent', () => {
 					expect(mockAddHero).toHaveBeenCalledTimes(1)
 					expect(mockAddHero).toHaveBeenCalledWith({ name: MOCK_HERO_1.name })
 					expect(component.heroes).toEqual([MOCK_HERO_2, MOCK_HERO_1])
+				})
+			})
+
+			describe('invoke addHero() w/ empty name', () => {
+				beforeEach(() => {
+					component.addHero('')
+				})
+
+				it('does NOT invoke HeroService.addHero(), leaves heroes unchanged', () => {
+					expect(mockAddHero).not.toHaveBeenCalled()
+					expect(component.heroes).toEqual([MOCK_HERO_2])
 				})
 			})
 		})

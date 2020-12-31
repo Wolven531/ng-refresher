@@ -13,10 +13,12 @@ describe('HeroesComponent', () => {
 
 	let component: HeroesComponent
 	let fixture: ComponentFixture<HeroesComponent>
+	let mockAddHero: jasmine.Spy
 	let mockDeleteHero: jasmine.Spy
 	let mockGetHeroes: jasmine.Spy
 
 	beforeEach(async () => {
+		mockAddHero = jasmine.createSpy().and.returnValue(of(MOCK_HERO_1))
 		mockDeleteHero = jasmine.createSpy().and.returnValue(of())
 		mockGetHeroes = jasmine.createSpy().and.returnValue(
 			of([ MOCK_HERO_1, MOCK_HERO_2 ])
@@ -35,6 +37,7 @@ describe('HeroesComponent', () => {
 				{
 					provide: HeroService,
 					useValue: {
+						addHero: mockAddHero,
 						deleteHero: mockDeleteHero,
 						getHeroes: mockGetHeroes,
 					},
@@ -86,6 +89,18 @@ describe('HeroesComponent', () => {
 				it('does NOT invoke HeroService.deleteHero(), leaves heroes unchanged', () => {
 					expect(mockDeleteHero).not.toHaveBeenCalled()
 					expect(component.heroes).toEqual([MOCK_HERO_2])
+				})
+			})
+
+			describe('invoke add() w/ MOCK_HERO_1', () => {
+				beforeEach(() => {
+					component.addHero(MOCK_HERO_1.name)
+				})
+
+				it('invokes HeroService.addHero(), adds hero to heroes', () => {
+					expect(mockAddHero).toHaveBeenCalledTimes(1)
+					expect(mockAddHero).toHaveBeenCalledWith({ name: MOCK_HERO_1.name })
+					expect(component.heroes).toEqual([MOCK_HERO_2, MOCK_HERO_1])
 				})
 			})
 		})

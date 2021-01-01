@@ -55,4 +55,20 @@ describe('HeroDetailComponent', () => {
 	it('creates component', () => {
 		expect(component).toBeTruthy()
 	})
+
+	describe('after ngOnInit()', () => {
+		let mockLoadHero: jasmine.Spy
+
+		beforeEach(() => {
+			mockLoadHero = jasmine.createSpy()
+
+			(component as any).loadHero = mockLoadHero
+
+			component.ngOnInit()
+		})
+
+		it('invokes loadHero', () => {
+			expect(mockLoadHero).toHaveBeenCalledTimes(1)
+		})
+	})
 })

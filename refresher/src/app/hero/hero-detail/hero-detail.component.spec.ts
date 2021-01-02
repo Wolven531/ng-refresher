@@ -73,6 +73,7 @@ describe('HeroDetailComponent', () => {
 
 		it('invokes HeroService.getHero()', () => {
 			expect(heroService.getHero).toHaveBeenCalledTimes(1)
+			expect(heroService.getHero).toHaveBeenCalledWith(1)
 			expect(component.hero).toEqual(fakeHero)
 		})
 	})

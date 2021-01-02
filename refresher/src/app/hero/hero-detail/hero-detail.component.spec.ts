@@ -11,6 +11,7 @@ import { HeroDetailComponent } from './hero-detail.component'
 describe('HeroDetailComponent', () => {
 	let component: HeroDetailComponent
 	let fixture: ComponentFixture<HeroDetailComponent>
+	let heroService: HeroService
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
@@ -33,6 +34,11 @@ describe('HeroDetailComponent', () => {
 					provide: ActivatedRoute,
 					useValue: {
 						params: of({ id: '1' }),
+						snapshot: {
+							paramMap: {
+								get: jasmine.createSpy().and.returnValue('1'),
+							},
+						},
 					},
 				},
 				{
@@ -49,6 +55,9 @@ describe('HeroDetailComponent', () => {
 			.compileComponents()
 
 		fixture = TestBed.createComponent(HeroDetailComponent)
+
+		heroService = TestBed.inject(HeroService)
+
 		component = fixture.componentInstance
 	})
 
@@ -57,18 +66,12 @@ describe('HeroDetailComponent', () => {
 	})
 
 	describe('after ngOnInit()', () => {
-		let mockLoadHero: jasmine.Spy
-
 		beforeEach(() => {
-			mockLoadHero = jasmine.createSpy()
-
-			(component as any).loadHero = mockLoadHero
-
 			component.ngOnInit()
 		})
 
-		it('invokes loadHero', () => {
-			expect(mockLoadHero).toHaveBeenCalledTimes(1)
+		it('invokes HeroService.getHero()', () => {
+			expect(heroService.getHero).toHaveBeenCalledTimes(1)
 		})
 	})
 })

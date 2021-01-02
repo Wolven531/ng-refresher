@@ -9,6 +9,7 @@ import { Hero } from '../hero.interface'
 import { HeroDetailComponent } from './hero-detail.component'
 
 describe('HeroDetailComponent', () => {
+	const fakeHero: Hero = { id: 1, name: 'test name' }
 	let component: HeroDetailComponent
 	let fixture: ComponentFixture<HeroDetailComponent>
 	let heroService: HeroService
@@ -45,7 +46,7 @@ describe('HeroDetailComponent', () => {
 					provide: HeroService,
 					useValue: {
 						getHero: jasmine.createSpy().and
-							.returnValue(of({ id: 1, name: 'test name' } as Hero)),
+							.returnValue(of(fakeHero)),
 						updateHero: jasmine.createSpy().and
 							.returnValue(of()),
 					},
@@ -72,6 +73,7 @@ describe('HeroDetailComponent', () => {
 
 		it('invokes HeroService.getHero()', () => {
 			expect(heroService.getHero).toHaveBeenCalledTimes(1)
+			expect(component.hero).toEqual(fakeHero)
 		})
 	})
 })

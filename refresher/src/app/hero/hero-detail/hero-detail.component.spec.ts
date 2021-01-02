@@ -76,5 +76,16 @@ describe('HeroDetailComponent', () => {
 			expect(heroService.getHero).toHaveBeenCalledWith(1)
 			expect(component.hero).toEqual(fakeHero)
 		})
+
+		describe('invoke save()', () => {
+			beforeEach(() => {
+				component.save()
+			})
+	
+			it('invokes HeroService.getHero()', () => {
+				expect(heroService.updateHero).toHaveBeenCalledTimes(1)
+				expect(heroService.updateHero).toHaveBeenCalledWith(fakeHero)
+			})
+		})
 	})
 })

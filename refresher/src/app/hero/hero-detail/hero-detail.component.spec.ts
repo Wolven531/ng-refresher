@@ -77,6 +77,21 @@ describe('HeroDetailComponent', () => {
 			expect(component.hero).toEqual(fakeHero)
 		})
 
+		describe('invoke goBack()', () => {
+			let mockBack: jasmine.Spy
+
+			beforeEach(() => {
+				mockBack = spyOn((component as any).location, 'back')
+					.and.callFake(() => {})
+
+				component.goBack()
+			})
+
+			it('invokes location.back()', () => {
+				expect(mockBack).toHaveBeenCalledTimes(1)
+			})
+		})
+
 		describe('invoke save()', () => {
 			beforeEach(() => {
 				component.save()

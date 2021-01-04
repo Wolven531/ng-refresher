@@ -19,7 +19,7 @@ module.exports = function (config) {
 					check: { // More info - https://github.com/karma-runner/karma-coverage/blob/master/docs/configuration.md#check
 						branches: 50,
 						excludes: [],
-						functions: 25,
+						functions: 50,
 						lines: 50,
 						statements: 50,
 					},
@@ -36,7 +36,7 @@ module.exports = function (config) {
 					check: {
 						branches: 50,
 						excludes: [],
-						functions: 25,
+						functions: 50,
 						lines: 50,
 						statements: 50,
 					},

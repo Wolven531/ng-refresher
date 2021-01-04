@@ -39,4 +39,14 @@ describe('HeroSearchComponent', () => {
 	it('creates component', () => {
 		expect(component).toBeTruthy()
 	})
+
+	describe('after ngOnInit()', () => {
+		beforeEach(() => {
+			component.ngOnInit()
+		})
+
+		it('sets heroes$ Observable', () => {
+			expect(component.heroes$).toBeTruthy()
+		})
+	})
 })

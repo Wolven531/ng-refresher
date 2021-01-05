@@ -10,8 +10,13 @@ import { DashboardComponent } from './dashboard.component'
 describe('DashboardComponent', () => {
 	let component: DashboardComponent
 	let fixture: ComponentFixture<DashboardComponent>
+	let mockGetHeroes: jasmine.Spy
 
 	beforeEach(async () => {
+		mockGetHeroes = jasmine.createSpy().and.returnValue(
+			of([ ] as Hero[])
+		)
+
 		await TestBed.configureTestingModule({
 			declarations: [
 				DashboardComponent,
@@ -25,7 +30,7 @@ describe('DashboardComponent', () => {
 				{
 					provide: HeroService,
 					useValue: {
-						getHeroes: jasmine.createSpy().and.returnValue(of([] as Hero[])),
+						getHeroes: mockGetHeroes,
 					},
 				},
 			],
@@ -38,5 +43,15 @@ describe('DashboardComponent', () => {
 
 	it('creates component', () => {
 		expect(component).toBeTruthy()
+	})
+
+	describe('after ngOnInit()', () => {
+		beforeEach(() => {
+			component.ngOnInit()
+		})
+
+		it('invokes HeroService.getHeroes()', () => {
+			expect(mockGetHeroes).toHaveBeenCalledTimes(1)
+		})
 	})
 })

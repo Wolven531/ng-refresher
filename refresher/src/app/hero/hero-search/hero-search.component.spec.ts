@@ -38,6 +38,7 @@ describe('HeroSearchComponent', () => {
 
 	it('creates component', () => {
 		expect(component).toBeTruthy()
+		expect((component as any).searchQueries).toBeTruthy()
 	})
 
 	describe('after ngOnInit()', () => {
@@ -47,6 +48,22 @@ describe('HeroSearchComponent', () => {
 
 		it('sets heroes$ Observable', () => {
 			expect(component.heroes$).toBeTruthy()
+		})
+
+		describe('', () => {
+			let spyNext: jasmine.Spy
+
+			beforeEach(() => {
+				spyNext = spyOn((component as any).searchQueries, 'next')
+					.and.callThrough()
+
+				component.searchHeroes('a')
+			})
+
+			it('passes query to searchQueries Subject', () => {
+				expect(spyNext).toHaveBeenCalledTimes(1)
+				expect(spyNext).toHaveBeenCalledWith('a')
+			})
 		})
 	})
 })

@@ -50,7 +50,7 @@ describe('HeroSearchComponent', () => {
 			expect(component.heroes$).toBeTruthy()
 		})
 
-		describe('', () => {
+		describe('invoke searchHeroes()', () => {
 			let spyNext: jasmine.Spy
 
 			beforeEach(() => {

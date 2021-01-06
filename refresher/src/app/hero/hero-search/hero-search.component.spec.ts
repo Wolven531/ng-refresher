@@ -10,6 +10,9 @@ import { HeroSearchComponent } from './hero-search.component'
 describe('HeroSearchComponent', () => {
 	let component: HeroSearchComponent
 	let fixture: ComponentFixture<HeroSearchComponent>
+	let mockHeroService: Partial<HeroService> = {
+		searchHeroes: jasmine.createSpy().and.returnValue(of([] as Hero[])),
+	}
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
@@ -24,9 +27,7 @@ describe('HeroSearchComponent', () => {
 			providers: [
 				{
 					provide: HeroService,
-					useValue: {
-						searchHeroes: jasmine.createSpy().and.returnValue(of([] as Hero[])),
-					},
+					useValue: mockHeroService,
 				},
 			],
 		})
@@ -58,11 +59,32 @@ describe('HeroSearchComponent', () => {
 					.and.callThrough()
 
 				component.searchHeroes('a')
+
+				// approach 1 - manually use setTimeout() and done()
+				// // must delay to account for debounceTime()
+				// setTimeout(() => {
+				// 	// must detect changes so pipe executes
+				// 	fixture.detectChanges()
+				// 	done()
+				// }, (HeroSearchComponent as any).MS_DELAY_SEARCH + 1);
+
+				// approach 2 - use fakeAsync() and tick() in beforeEach()
+				// tick((HeroSearchComponent as any).MS_DELAY_SEARCH + 1)
+				// fixture.detectChanges()
+
 			})
 
 			it('passes query to searchQueries Subject', () => {
 				expect(spyNext).toHaveBeenCalledTimes(1)
 				expect(spyNext).toHaveBeenCalledWith('a')
+
+				// approach 3 - use fakeAsync and tick() in it()
+				// tick((HeroSearchComponent as any).MS_DELAY_SEARCH + 1)
+				// fixture.detectChanges()
+
+				// TODO - enable assertions when it is figured out
+				// expect(mockHeroService.searchHeroes).toHaveBeenCalledTimes(1)
+				// expect(mockHeroService.searchHeroes).toHaveBeenCalledWith('a')
 			})
 		})
 	})

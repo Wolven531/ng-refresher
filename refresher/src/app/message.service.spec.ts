@@ -9,7 +9,9 @@ describe('MessageService', () => {
 		service = TestBed.inject(MessageService)
 	})
 
-	it('should be created', () => {
+	it('creates service w/ messages initialized', () => {
 		expect(service).toBeTruthy()
+		expect(service.messages).toBeInstanceOf(Array)
+		expect(service.messages).toHaveSize(0)
 	})
 })

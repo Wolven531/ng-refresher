@@ -14,4 +14,16 @@ describe('MessageService', () => {
 		expect(service.messages).toBeInstanceOf(Array)
 		expect(service.messages).toHaveSize(0)
 	})
+
+	describe('invoke add()', () => {
+		const fakeMsg = 'msg 1'
+
+		beforeEach(() => {
+			service.add(fakeMsg)
+		})
+
+		it('adds message to collection', () => {
+			expect(service.messages).toEqual([fakeMsg])
+		})
+	})
 })

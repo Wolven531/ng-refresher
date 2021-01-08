@@ -25,5 +25,15 @@ describe('MessageService', () => {
 		it('adds message to collection', () => {
 			expect(service.messages).toEqual([fakeMsg])
 		})
+
+		describe('invoke clearAll()', () => {
+			beforeEach(() => {
+				service.clearAll()
+			})
+
+			it('clears all messages from collection', () => {
+				expect(service.messages).toEqual([])
+			})
+		})
 	})
 })

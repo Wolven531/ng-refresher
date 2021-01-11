@@ -8,6 +8,7 @@ import { MessageService } from './message.service'
 describe('HeroService', () => {
 	let mockNet: HttpClient
 	let service: HeroService
+	let mockMessageService: MessageService
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -26,6 +27,7 @@ describe('HeroService', () => {
 		})
 
 		service = TestBed.inject(HeroService)
+		mockMessageService = TestBed.inject(MessageService)
 		mockNet = TestBed.inject(HttpClient)
 	})
 
@@ -34,27 +36,29 @@ describe('HeroService', () => {
 	})
 
 	describe('invoke getHeroes()', () => {
+		let subGetHeroes: Subscription
 		let spyGet: jasmine.Spy
-		let sub: Subscription
 
 		beforeEach((done) => {
 			spyGet = spyOn(mockNet, 'get').and.returnValue(of([
 				{ id: 1, name: 'heroone', } as Hero,
 			]))
 
-			sub = service.getHeroes().subscribe(() => {
-				done()
-			})
+			subGetHeroes = service.getHeroes().subscribe(done)
 		})
 
 		afterEach(() => {
-			sub.unsubscribe()
+			subGetHeroes.unsubscribe()
 		})
 
 		it('invokes HttpClient.get() properly', () => {
 			expect(spyGet).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
 			expect(spyGet).toHaveBeenCalledWith(HeroService['ENDPOINT_HEROES'])
+
+			expect(mockMessageService.add).toHaveBeenCalledTimes(1)
+			// private member property, use string accessor to avoid cast to any
+			expect(mockMessageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HEROES_FETCHED']}`)
 		})
 	})
 })

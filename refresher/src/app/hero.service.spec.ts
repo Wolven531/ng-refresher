@@ -48,6 +48,7 @@ describe('HeroService', () => {
 		})
 
 		afterEach(() => {
+			(mockMessageService.add as jasmine.Spy).calls.reset()
 			subGetHeroes.unsubscribe()
 		})
 

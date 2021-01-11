@@ -1,7 +1,8 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { TestBed } from '@angular/core/testing'
-import { of } from 'rxjs'
+import { of, Subscription } from 'rxjs'
 import { HeroService } from './hero.service'
+import { Hero } from './hero/hero.interface'
 import { MessageService } from './message.service'
 
 describe('HeroService', () => {
@@ -34,11 +35,20 @@ describe('HeroService', () => {
 
 	describe('invoke getHeroes()', () => {
 		let spyGet: jasmine.Spy
+		let sub: Subscription
 
-		beforeEach(() => {
-			spyGet = spyOn(mockNet, 'get').and.returnValue(of([]))
+		beforeEach((done) => {
+			spyGet = spyOn(mockNet, 'get').and.returnValue(of([
+				{ id: 1, name: 'heroone', } as Hero,
+			]))
 
-			service.getHeroes()
+			sub = service.getHeroes().subscribe(() => {
+				done()
+			})
+		})
+
+		afterEach(() => {
+			sub.unsubscribe()
 		})
 
 		it('invokes HttpClient.get() properly', () => {

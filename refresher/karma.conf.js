@@ -24,6 +24,10 @@ module.exports = function (config) {
 						statements: 50,
 					},
 					dir: require('path').join(__dirname, 'coverage'),
+					subdir: function (browser) {
+						// normalization keeps consistent browser name across different OS
+						return browser.toLowerCase().split(/[ /-]/)[0]
+					},
 					type: 'html',
 					watermarks: { // first is start of yellow, second is start of green
 						branches: [ 50, 80 ],

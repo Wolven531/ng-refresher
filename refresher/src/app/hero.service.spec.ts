@@ -35,6 +35,35 @@ describe('HeroService', () => {
 		expect(service).toBeTruthy()
 	})
 
+	describe('invoke getHero()', () => {
+		const fakeId = 1
+		let subGetHero: Subscription
+		let spyGet: jasmine.Spy
+
+		beforeEach((done) => {
+			spyGet = spyOn(mockNet, 'get').and.returnValue(of(
+				{ id: fakeId, name: 'heroone', } as Hero,
+			))
+
+			subGetHero = service.getHero(1).subscribe(done)
+		})
+
+		afterEach(() => {
+			(mockMessageService.add as jasmine.Spy).calls.reset()
+			subGetHero.unsubscribe()
+		})
+
+		it('invokes HttpClient.get() properly', () => {
+			expect(spyGet).toHaveBeenCalledTimes(1)
+			// private member property, use string accessor to avoid cast to any
+			expect(spyGet).toHaveBeenCalledWith(`${HeroService['ENDPOINT_HEROES']}/${fakeId}`)
+
+			expect(mockMessageService.add).toHaveBeenCalledTimes(1)
+			// private member property, use string accessor to avoid cast to any
+			expect(mockMessageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HERO_FETCHED']}, id=${fakeId}`)
+		})
+	})
+
 	describe('invoke getHeroes()', () => {
 		let subGetHeroes: Subscription
 		let spyGet: jasmine.Spy

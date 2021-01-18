@@ -19,9 +19,9 @@ module.exports = function (config) {
 					check: { // More info - https://github.com/karma-runner/karma-coverage/blob/master/docs/configuration.md#check
 						branches: 60,
 						excludes: [],
-						functions: 80,
-						lines: 85,
-						statements: 85,
+						functions: 70,
+						lines: 80,
+						statements: 80,
 					},
 					dir: require('path').join(__dirname, 'coverage'),
 					subdir: function (browser) {
@@ -40,9 +40,9 @@ module.exports = function (config) {
 					check: {
 						branches: 60,
 						excludes: [],
-						functions: 80,
-						lines: 85,
-						statements: 85,
+						functions: 70,
+						lines: 80,
+						statements: 80,
 					},
 					type: 'text-summary',
 					watermarks: { // first is start of yellow, second is start of green

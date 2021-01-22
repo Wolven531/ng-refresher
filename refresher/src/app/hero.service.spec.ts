@@ -127,12 +127,12 @@ describe('HeroService', () => {
 		let subGetHeroes: Subscription
 		let spyGet: jasmine.Spy
 
-		beforeEach((done) => {
-			// spyGet = spyOn(mockNet, 'get').and.returnValue(of([
-			// 	{ id: 1, name: 'heroone', } as Hero,
-			// ]))
+		beforeEach(() => {
+			spyGet = spyOn(mockNet, 'get').and.returnValue(of([
+				{ id: 1, name: 'heroone', } as Hero,
+			]))
 
-			subGetHeroes = service.getHeroes().subscribe(done)
+			subGetHeroes = service.getHeroes().subscribe()
 		})
 
 		afterEach(() => {

@@ -157,7 +157,7 @@ describe('HeroService', () => {
 		let spyPut: jasmine.Spy
 
 		beforeEach((done) => {
-			// spyPut = spyOn(mockNet, 'put').and.returnValue(of(fakeHero))
+			spyPut = spyOn(mockNet, 'put').and.returnValue(of(fakeHero))
 
 			subUpdateHero = service.updateHero(fakeHero).subscribe(done)
 		})

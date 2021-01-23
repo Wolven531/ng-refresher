@@ -43,7 +43,7 @@ export class HeroService {
 			: heroOrId.id
 		const url = `${HeroService.ENDPOINT_HEROES}/${heroId}`
 
-		return this.net.delete<Hero>(`${HeroService.ENDPOINT_HEROES}/${heroId}`, this.httpOptions)
+		return this.net.delete<Hero>(url, this.httpOptions)
 			.pipe(
 				tap(_ => this.log(`${HeroService.MSG_HERO_DELETED}, id=${heroId}`)),
 				catchError(this.handleError<Hero>('deleteHero')),

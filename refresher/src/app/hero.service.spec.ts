@@ -64,24 +64,24 @@ describe('HeroService', () => {
 		})
 	})
 
-	// describe('invoke deleteHero()', () => {
-	// 	const fakeHero: Hero = { id: 1, name: 'heroone' }
-	// 	let subDeleteHero: Subscription
-	// 	let spyDelete: jasmine.Spy
+	describe('invoke deleteHero()', () => {
+		const fakeHero: Hero = { id: 1, name: 'heroone' }
+		let subDeleteHero: Subscription
+		let spyDelete: jasmine.Spy
 
-	// 	beforeEach((done) => {
-	// 		spyDelete = spyOn(mockNet, 'delete').and.returnValue(of())
+		beforeEach(() => {
+			spyDelete = spyOn(mockNet, 'delete').and.returnValue(of())
 
-	// 		subDeleteHero = service.deleteHero(fakeHero.id).subscribe(done)
-	// 	})
+			subDeleteHero = service.deleteHero(fakeHero.id).subscribe()
+		})
 
-	// 	afterEach(() => {
+		afterEach(() => {
 	// 		(mockMessageService.add as jasmine.Spy).calls.reset()
-	// 		subDeleteHero.unsubscribe()
-	// 	})
+			subDeleteHero.unsubscribe()
+		})
 
-	// 	it('invokes HttpClient.delete() properly', () => {
-	// 		expect(spyDelete).toHaveBeenCalledTimes(1)
+		it('invokes HttpClient.delete() properly', () => {
+			expect(spyDelete).toHaveBeenCalledTimes(1)
 	// 		// private member property, use string accessor to avoid cast to any
 	// 		expect(spyDelete).toHaveBeenCalledWith(
 	// 			`${HeroService['ENDPOINT_HEROES']}/${fakeHero.id}`,
@@ -91,8 +91,8 @@ describe('HeroService', () => {
 	// 		expect(mockMessageService.add).toHaveBeenCalledTimes(1)
 	// 		// private member property, use string accessor to avoid cast to any
 	// 		expect(mockMessageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HERO_DELETED']}, id=${fakeHero.id}`)
-	// 	})
-	// })
+		})
+	})
 
 	xdescribe('invoke getHero()', () => {
 		const fakeId = 1

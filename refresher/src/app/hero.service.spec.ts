@@ -1,33 +1,32 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http'
-import { TestBed, waitForAsync } from '@angular/core/testing'
-import { Observable, of, Subscription } from 'rxjs'
+import { TestBed } from '@angular/core/testing'
+import { of, Subscription } from 'rxjs'
 import { HeroService } from './hero.service'
 import { Hero } from './hero/hero.interface'
 import { MessageService } from './message.service'
 
 describe('HeroService', () => {
+	let messageService: MessageService
 	let mockNet: HttpClient
 	let service: HeroService
-	let mockMessageService: MessageService
 
-	beforeEach(() => {
-		TestBed.configureTestingModule({
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
 			imports: [
 				HttpClientModule,
 			],
-			providers: [
-				{
-					provide: MessageService,
-					useValue: {
-						add: jasmine.createSpy(),
-					},
-				},
-			],
-		})
+			providers: [],
+		}).compileComponents()
 
+		// inject service to test
 		service = TestBed.inject(HeroService)
-		mockMessageService = TestBed.inject(MessageService)
+
+		// inject service dependencies
+		messageService = TestBed.inject(MessageService)
 		mockNet = TestBed.inject(HttpClient)
+
+		// set up mocks / spies on dependencies
+		spyOn(messageService, 'add').and.callFake(jasmine.createSpy())
 	})
 
 	it('creates service', () => {
@@ -39,11 +38,11 @@ describe('HeroService', () => {
 		let subAddHero: Subscription
 		let spyPost: jasmine.Spy
 
-		beforeEach(waitForAsync(() => {
+		beforeEach(() => {
 			spyPost = spyOn(mockNet, 'post').and.returnValue(of(fakeHero))
 
 			subAddHero = service.addHero(fakeHero).subscribe()
-		}))
+		})
 
 		afterEach(() => {
 			subAddHero.unsubscribe()
@@ -58,13 +57,13 @@ describe('HeroService', () => {
 				service['httpOptions'],
 			)
 
-			expect(mockMessageService.add).toHaveBeenCalledTimes(1)
+			expect(messageService.add).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(mockMessageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HERO_ADDED']} w/ id=${fakeHero.id}`)
+			expect(messageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HERO_ADDED']} w/ id=${fakeHero.id}`)
 		})
 	})
 
-	describe('invoke deleteHero()', () => {
+	xdescribe('invoke deleteHero()', () => {
 		const fakeHero: Hero = { id: 1, name: 'heroone' }
 		let subDeleteHero: Subscription
 		let spyDelete: jasmine.Spy
@@ -76,21 +75,20 @@ describe('HeroService', () => {
 		})
 
 		afterEach(() => {
-	// 		(mockMessageService.add as jasmine.Spy).calls.reset()
 			subDeleteHero.unsubscribe()
 		})
 
 		it('invokes HttpClient.delete() properly', () => {
 			expect(spyDelete).toHaveBeenCalledTimes(1)
-	// 		// private member property, use string accessor to avoid cast to any
-	// 		expect(spyDelete).toHaveBeenCalledWith(
-	// 			`${HeroService['ENDPOINT_HEROES']}/${fakeHero.id}`,
-	// 			service['httpOptions'],
-	// 		)
+			// private member property, use string accessor to avoid cast to any
+			expect(spyDelete).toHaveBeenCalledWith(
+				`${HeroService['ENDPOINT_HEROES']}/${fakeHero.id}`,
+				service['httpOptions'],
+			)
 
-	// 		expect(mockMessageService.add).toHaveBeenCalledTimes(1)
-	// 		// private member property, use string accessor to avoid cast to any
-	// 		expect(mockMessageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HERO_DELETED']}, id=${fakeHero.id}`)
+			expect(messageService.add).toHaveBeenCalledTimes(1)
+			// private member property, use string accessor to avoid cast to any
+			expect(messageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HERO_DELETED']}, id=${fakeHero.id}`)
 		})
 	})
 
@@ -99,16 +97,15 @@ describe('HeroService', () => {
 		let subGetHero: Subscription
 		let spyGet: jasmine.Spy
 
-		beforeEach(waitForAsync(() => {
+		beforeEach(() => {
 			spyGet = spyOn(mockNet, 'get').and.returnValue(of(
 				{ id: fakeId, name: 'heroone', } as Hero,
 			))
 
 			subGetHero = service.getHero(1).subscribe()
-		}))
+		})
 
 		afterEach(() => {
-			(mockMessageService.add as jasmine.Spy).calls.reset()
 			subGetHero.unsubscribe()
 		})
 
@@ -117,9 +114,9 @@ describe('HeroService', () => {
 			// private member property, use string accessor to avoid cast to any
 			expect(spyGet).toHaveBeenCalledWith(`${HeroService['ENDPOINT_HEROES']}/${fakeId}`)
 
-			expect(mockMessageService.add).toHaveBeenCalledTimes(1)
+			expect(messageService.add).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(mockMessageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HERO_FETCHED']}, id=${fakeId}`)
+			expect(messageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HERO_FETCHED']}, id=${fakeId}`)
 		})
 	})
 
@@ -136,7 +133,6 @@ describe('HeroService', () => {
 		})
 
 		afterEach(() => {
-			(mockMessageService.add as jasmine.Spy).calls.reset()
 			subGetHeroes.unsubscribe()
 		})
 
@@ -145,9 +141,9 @@ describe('HeroService', () => {
 			// private member property, use string accessor to avoid cast to any
 			expect(spyGet).toHaveBeenCalledWith(HeroService['ENDPOINT_HEROES'])
 
-			expect(mockMessageService.add).toHaveBeenCalledTimes(1)
+			expect(messageService.add).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(mockMessageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HEROES_FETCHED']}`)
+			expect(messageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HEROES_FETCHED']}`)
 		})
 	})
 
@@ -163,7 +159,6 @@ describe('HeroService', () => {
 		})
 
 		afterEach(() => {
-			(mockMessageService.add as jasmine.Spy).calls.reset()
 			subUpdateHero.unsubscribe()
 		})
 
@@ -176,9 +171,9 @@ describe('HeroService', () => {
 				service['httpOptions'],
 			)
 
-			expect(mockMessageService.add).toHaveBeenCalledTimes(1)
+			expect(messageService.add).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(mockMessageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HERO_UPDATED']} id=${fakeHero.id}`)
+			expect(messageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HERO_UPDATED']} id=${fakeHero.id}`)
 		})
 	})
 })

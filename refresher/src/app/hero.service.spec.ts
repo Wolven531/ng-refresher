@@ -92,7 +92,7 @@ describe('HeroService', () => {
 		})
 	})
 
-	xdescribe('invoke getHero()', () => {
+	describe('invoke getHero()', () => {
 		const fakeId = 1
 		let subGetHero: Subscription
 		let spyGet: jasmine.Spy

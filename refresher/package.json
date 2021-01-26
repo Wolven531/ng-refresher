@@ -13,7 +13,7 @@
     "ng": "ng",
     "start": "ng serve --open",
     "start:headless": "ng serve",
-    "test": "ng test --browsers=ChromeHeadlessCustom --watch=true --reporters progress",
+    "test": "ng test --browsers=ChromeHeadlessCustom --watch=false --reporters progress",
     "test-cc": "ng test --browsers=ChromeHeadlessCustom --watch=false --code-coverage",
     "test-watch": "ng test --browsers=ChromeHeadlessCustom --watch=true --reporters progress"
   },

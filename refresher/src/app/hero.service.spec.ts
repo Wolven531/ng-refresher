@@ -66,11 +66,11 @@ describe('HeroService', () => {
 
 	xdescribe('invoke deleteHero()', () => {
 		const fakeHero: Hero = { id: 1, name: 'heroone' }
+		// let mockDelete: jasmine.Spy
 		let subDeleteHero: Subscription
-		let spyDelete: jasmine.Spy
 
 		beforeEach(() => {
-			spyDelete = spyOn(mockNet, 'delete').and.returnValue(of())
+			// mockDelete = spyOn(mockNet, 'delete').and.callFake((url, options) => of(''))
 
 			subDeleteHero = service.deleteHero(fakeHero.id).subscribe()
 		})
@@ -80,12 +80,12 @@ describe('HeroService', () => {
 		})
 
 		it('invokes HttpClient.delete() properly', () => {
-			expect(spyDelete).toHaveBeenCalledTimes(1)
+			// expect(mockDelete).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(spyDelete).toHaveBeenCalledWith(
-				`${HeroService['ENDPOINT_HEROES']}/${fakeHero.id}`,
-				service['httpOptions'],
-			)
+			// expect(mockDelete).toHaveBeenCalledWith(
+			// 	`${HeroService['ENDPOINT_HEROES']}/${fakeHero.id}`,
+			// 	service['httpOptions'],
+			// )
 
 			expect(messageService.add).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any

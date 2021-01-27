@@ -1,4 +1,5 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { TestBed } from '@angular/core/testing'
 import { of, Subscription } from 'rxjs'
 import { HeroService } from './hero.service'
@@ -13,7 +14,7 @@ describe('HeroService', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [
-				HttpClientModule,
+				HttpClientTestingModule,
 			],
 			providers: [],
 		}).compileComponents()

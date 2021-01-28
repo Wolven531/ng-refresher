@@ -46,7 +46,7 @@ export class HeroService {
 		return this.net.delete<any>(url, this.httpOptions)
 			.pipe(
 				tap(_ => this.log(`${HeroService.MSG_HERO_DELETED}, id=${heroId}`)),
-				catchError(this.handleError<Hero>('deleteHero')),
+				catchError(this.handleError<any>('deleteHero')),
 			)
 	}
 

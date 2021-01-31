@@ -147,8 +147,8 @@ describe('HeroService', () => {
 	describe('invoke updateHero()', () => {
 		let subUpdateHero: Subscription
 
-		beforeEach((done) => {
-			subUpdateHero = service.updateHero(FAKE_HERO).subscribe(done)
+		beforeEach(() => {
+			subUpdateHero = service.updateHero(FAKE_HERO).subscribe()
 		})
 
 		afterEach(() => {

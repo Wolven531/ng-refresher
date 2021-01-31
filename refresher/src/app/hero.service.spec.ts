@@ -30,6 +30,14 @@ describe('HeroService', () => {
 
 		// set up mocks / spies on dependencies
 		spyOn(messageService, 'add').and.callFake(jasmine.createSpy())
+
+		// spyOn(mockNet, 'delete') // err - TypeError: Cannot read property 'pipe' of undefined
+		// spyOn(mockNet, 'delete').and.resolveTo() // err - TypeError: this.net.delete(...).pipe is not a function
+		// spyOn(mockNet, 'delete').and.callFake(jasmine.createSpy()) // TBD
+		// spyOn(mockNet, 'delete').and.callFake((url, options) => of('')) // TBD
+		spyOn(mockNet, 'delete').and.returnValue(of()) //  works
+		spyOn(mockNet, 'post').and.returnValue(of(FAKE_HERO))
+		spyOn(mockNet, 'put').and.returnValue(of(FAKE_HERO))
 	})
 
 	it('creates service', () => {
@@ -38,11 +46,8 @@ describe('HeroService', () => {
 
 	describe('invoke addHero()', () => {
 		let subAddHero: Subscription
-		let spyPost: jasmine.Spy
 
 		beforeEach(() => {
-			spyPost = spyOn(mockNet, 'post').and.returnValue(of(FAKE_HERO))
-
 			subAddHero = service.addHero(FAKE_HERO).subscribe()
 		})
 
@@ -51,9 +56,9 @@ describe('HeroService', () => {
 		})
 
 		it('invokes HttpClient.post() properly', () => {
-			expect(spyPost).toHaveBeenCalledTimes(1)
+			expect(mockNet.post).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(spyPost).toHaveBeenCalledWith(
+			expect(mockNet.post).toHaveBeenCalledWith(
 				HeroService['ENDPOINT_HEROES'],
 				FAKE_HERO,
 				service['httpOptions'],
@@ -69,12 +74,6 @@ describe('HeroService', () => {
 		let subDeleteHero: Subscription
 
 		beforeEach(() => {
-			// spyOn(mockNet, 'delete') // err - TypeError: Cannot read property 'pipe' of undefined
-			// spyOn(mockNet, 'delete').and.resolveTo() // err - TypeError: this.net.delete(...).pipe is not a function
-			// spyOn(mockNet, 'delete').and.callFake(jasmine.createSpy()) // TBD
-			// spyOn(mockNet, 'delete').and.callFake((url, options) => of('')) // TBD
-			spyOn(mockNet, 'delete').and.returnValue(of()) //  works
-
 			subDeleteHero = service.deleteHero(FAKE_HERO.id).subscribe()
 		})
 
@@ -99,10 +98,9 @@ describe('HeroService', () => {
 
 	describe('invoke getHero()', () => {
 		let subGetHero: Subscription
-		let spyGet: jasmine.Spy
 
 		beforeEach(() => {
-			spyGet = spyOn(mockNet, 'get').and.returnValue(of(FAKE_HERO))
+			spyOn(mockNet, 'get').and.returnValue(of(FAKE_HERO))
 
 			subGetHero = service.getHero(1).subscribe()
 		})
@@ -112,9 +110,9 @@ describe('HeroService', () => {
 		})
 
 		it('invokes HttpClient.get() properly', () => {
-			expect(spyGet).toHaveBeenCalledTimes(1)
+			expect(mockNet.get).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(spyGet).toHaveBeenCalledWith(`${HeroService['ENDPOINT_HEROES']}/${FAKE_HERO.id}`)
+			expect(mockNet.get).toHaveBeenCalledWith(`${HeroService['ENDPOINT_HEROES']}/${FAKE_HERO.id}`)
 
 			expect(messageService.add).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
@@ -124,10 +122,9 @@ describe('HeroService', () => {
 
 	describe('invoke getHeroes()', () => {
 		let subGetHeroes: Subscription
-		let spyGet: jasmine.Spy
 
 		beforeEach(() => {
-			spyGet = spyOn(mockNet, 'get').and.returnValue(of([FAKE_HERO]))
+			spyOn(mockNet, 'get').and.returnValue(of([FAKE_HERO]))
 
 			subGetHeroes = service.getHeroes().subscribe()
 		})
@@ -137,9 +134,9 @@ describe('HeroService', () => {
 		})
 
 		it('invokes HttpClient.get() properly', () => {
-			expect(spyGet).toHaveBeenCalledTimes(1)
+			expect(mockNet.get).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(spyGet).toHaveBeenCalledWith(HeroService['ENDPOINT_HEROES'])
+			expect(mockNet.get).toHaveBeenCalledWith(HeroService['ENDPOINT_HEROES'])
 
 			expect(messageService.add).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
@@ -149,11 +146,8 @@ describe('HeroService', () => {
 
 	describe('invoke updateHero()', () => {
 		let subUpdateHero: Subscription
-		let spyPut: jasmine.Spy
 
 		beforeEach((done) => {
-			spyPut = spyOn(mockNet, 'put').and.returnValue(of(FAKE_HERO))
-
 			subUpdateHero = service.updateHero(FAKE_HERO).subscribe(done)
 		})
 
@@ -162,9 +156,9 @@ describe('HeroService', () => {
 		})
 
 		it('invokes HttpClient.put() properly', () => {
-			expect(spyPut).toHaveBeenCalledTimes(1)
+			expect(mockNet.put).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(spyPut).toHaveBeenCalledWith(
+			expect(mockNet.put).toHaveBeenCalledWith(
 				HeroService['ENDPOINT_HEROES'],
 				FAKE_HERO,
 				service['httpOptions'],

@@ -31,11 +31,10 @@ describe('HeroService', () => {
 		// set up mocks / spies on dependencies
 		spyOn(messageService, 'add').and.callFake(jasmine.createSpy())
 
-		// spyOn(mockNet, 'delete') // err - TypeError: Cannot read property 'pipe' of undefined
-		// spyOn(mockNet, 'delete').and.resolveTo() // err - TypeError: this.net.delete(...).pipe is not a function
-		// spyOn(mockNet, 'delete').and.callFake(jasmine.createSpy()) // TBD
-		// spyOn(mockNet, 'delete').and.callFake((url, options) => of('')) // TBD
-		spyOn(mockNet, 'delete').and.returnValue(of()) //  works
+		// spyOn(mockNet, 'delete')										// err - TypeError: Cannot read property 'pipe' of undefined
+		// spyOn(mockNet, 'delete').and.resolveTo()						// err - TypeError: this.net.delete(...).pipe is not a function
+		// spyOn(mockNet, 'delete').and.callFake(jasmine.createSpy())	// err - TypeError: Cannot read property 'pipe' of undefined
+		spyOn(mockNet, 'delete').and.callFake((url, options) => of<any>())
 		spyOn(mockNet, 'post').and.returnValue(of(FAKE_HERO))
 		spyOn(mockNet, 'put').and.returnValue(of(FAKE_HERO))
 	})

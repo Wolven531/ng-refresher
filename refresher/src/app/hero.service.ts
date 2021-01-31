@@ -37,16 +37,15 @@ export class HeroService {
 			)
 	}
 
-	deleteHero(heroOrId: Hero | number): Observable<any> {
+	deleteHero(heroOrId: Hero | number): Observable<unknown> {
 		const heroId = typeof heroOrId === 'number'
 			? heroOrId
 			: heroOrId.id
-		const url = `${HeroService.ENDPOINT_HEROES}/${heroId}`
 
-		return this.net.delete<any>(url, this.httpOptions)
+		return this.net.delete(`${HeroService.ENDPOINT_HEROES}/${heroId}`, this.httpOptions)
 			.pipe(
-				tap(_ => this.log(`${HeroService.MSG_HERO_DELETED}, id=${heroId}`)),
-				catchError(this.handleError<any>('deleteHero')),
+				tap(() => this.log(`${HeroService.MSG_HERO_DELETED}, id=${heroId}`)),
+				catchError(this.handleError('deleteHero')),
 			)
 	}
 

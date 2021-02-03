@@ -15,7 +15,7 @@
     "start:headless": "ng serve",
     "test": "ng test --browsers=ChromeHeadlessCustom --watch=false --reporters progress",
     "test-cc": "ng test --browsers=ChromeHeadlessCustom --watch=false --code-coverage",
-    "test-cc-o": "node ./node_modules/open-cli/cli.js coverage/chrome/index.html -- 'google chrome' --incognito",
+    "test-cc-o": "node ./node_modules/open-cli/cli.js coverage/chrome/index.html",
     "test-cc-o-fire": "node ./node_modules/open-cli/cli.js coverage/chrome/index.html -- firefox",
     "test-watch": "ng test --browsers=ChromeHeadlessCustom --watch=true --reporters progress"
   },

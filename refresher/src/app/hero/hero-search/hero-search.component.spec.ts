@@ -1,20 +1,28 @@
 import { CommonModule } from '@angular/common'
-import { ComponentFixture, TestBed } from '@angular/core/testing'
+import { HttpClient } from '@angular/common/http'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing'
 import { FormsModule } from '@angular/forms'
-import { of } from 'rxjs'
-import { ApplicationPipesModule } from 'src/app/application-pipes/application-pipes.module'
-import { HeroService } from 'src/app/hero.service'
+import { of, Subscription } from 'rxjs'
+import { ApplicationPipesModule } from '../../application-pipes/application-pipes.module'
+import { HeroService } from '../../hero.service'
 import { Hero } from '../hero.interface'
 import { HeroSearchComponent } from './hero-search.component'
 
 describe('HeroSearchComponent', () => {
 	let component: HeroSearchComponent
 	let fixture: ComponentFixture<HeroSearchComponent>
-	let mockHeroService: Partial<HeroService> = {
-		searchHeroes: jasmine.createSpy().and.returnValue(of([] as Hero[])),
-	}
+	let heroService: HeroService
+	let mockNet: jasmine.SpyObj<HttpClient>
 
 	beforeEach(async () => {
+		mockNet = jasmine.createSpyObj<HttpClient>(['delete', 'get', 'post', 'put'], []);
+
+		mockNet.delete.and.returnValue(of())
+		mockNet.get.and.returnValue(of())
+		mockNet.post.and.returnValue(of())
+		mockNet.put.and.returnValue(of())
+
 		await TestBed.configureTestingModule({
 			declarations: [
 				HeroSearchComponent,
@@ -23,15 +31,18 @@ describe('HeroSearchComponent', () => {
 				CommonModule,
 				FormsModule,
 				ApplicationPipesModule,
+				HttpClientTestingModule,
 			],
 			providers: [
 				{
-					provide: HeroService,
-					useValue: mockHeroService,
-				},
+					provide: HttpClient,
+					useValue: mockNet,
+				}
 			],
 		})
 			.compileComponents()
+
+		heroService = TestBed.inject(HeroService)
 
 		fixture = TestBed.createComponent(HeroSearchComponent)
 		component = fixture.componentInstance
@@ -53,12 +64,18 @@ describe('HeroSearchComponent', () => {
 
 		describe('invoke searchHeroes()', () => {
 			let spyNext: jasmine.Spy
+			let subHeroes: Subscription
 
-			beforeEach(() => {
-				spyNext = spyOn((component as any).searchQueries, 'next')
+			beforeEach(fakeAsync(() => {
+				spyOn(heroService, 'searchHeroes')
+					.and.returnValue(of([] as Hero[]))
+				spyNext = spyOn(component['searchQueries'], 'next')
 					.and.callThrough()
 
 				component.searchHeroes('a')
+				subHeroes = component.heroes$.subscribe()
+
+				tick(HeroSearchComponent['MS_DELAY_SEARCH'] + 1)
 
 				// approach 1 - manually use setTimeout() and done()
 				// // must delay to account for debounceTime()
@@ -70,8 +87,11 @@ describe('HeroSearchComponent', () => {
 
 				// approach 2 - use fakeAsync() and tick() in beforeEach()
 				// tick((HeroSearchComponent as any).MS_DELAY_SEARCH + 1)
-				// fixture.detectChanges()
+				fixture.detectChanges()
+			}))
 
+			afterEach(() => {
+				subHeroes.unsubscribe()
 			})
 
 			it('passes query to searchQueries Subject', () => {
@@ -83,7 +103,7 @@ describe('HeroSearchComponent', () => {
 				// fixture.detectChanges()
 
 				// TODO - enable assertions when it is figured out
-				// expect(mockHeroService.searchHeroes).toHaveBeenCalledTimes(1)
+				// expect(heroService.searchHeroes).toHaveBeenCalledTimes(1)
 				// expect(mockHeroService.searchHeroes).toHaveBeenCalledWith('a')
 			})
 		})

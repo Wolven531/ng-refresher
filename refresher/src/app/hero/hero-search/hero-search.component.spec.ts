@@ -1,6 +1,4 @@
 import { CommonModule } from '@angular/common'
-import { HttpClient } from '@angular/common/http'
-import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing'
 import { FormsModule } from '@angular/forms'
 import { of, Subscription } from 'rxjs'
@@ -12,16 +10,12 @@ import { HeroSearchComponent } from './hero-search.component'
 describe('HeroSearchComponent', () => {
 	let component: HeroSearchComponent
 	let fixture: ComponentFixture<HeroSearchComponent>
-	let heroService: HeroService
-	let mockNet: jasmine.SpyObj<HttpClient>
+	let mockHeroService: HeroService
 
 	beforeEach(async () => {
-		mockNet = jasmine.createSpyObj<HttpClient>(['delete', 'get', 'post', 'put'], []);
+		mockHeroService = jasmine.createSpyObj<HeroService>(['searchHeroes'], []);
 
-		mockNet.delete.and.returnValue(of())
-		mockNet.get.and.returnValue(of())
-		mockNet.post.and.returnValue(of())
-		mockNet.put.and.returnValue(of())
+		(mockHeroService.searchHeroes as jasmine.Spy).and.returnValue(of([] as Hero[]))
 
 		await TestBed.configureTestingModule({
 			declarations: [
@@ -31,18 +25,15 @@ describe('HeroSearchComponent', () => {
 				CommonModule,
 				FormsModule,
 				ApplicationPipesModule,
-				HttpClientTestingModule,
 			],
 			providers: [
 				{
-					provide: HttpClient,
-					useValue: mockNet,
-				}
+					provide: HeroService,
+					useValue: mockHeroService,
+				},
 			],
 		})
 			.compileComponents()
-
-		heroService = TestBed.inject(HeroService)
 
 		fixture = TestBed.createComponent(HeroSearchComponent)
 		component = fixture.componentInstance
@@ -67,8 +58,6 @@ describe('HeroSearchComponent', () => {
 			let subHeroes: Subscription
 
 			beforeEach(fakeAsync(() => {
-				spyOn(heroService, 'searchHeroes')
-					.and.returnValue(of([] as Hero[]))
 				spyNext = spyOn(component['searchQueries'], 'next')
 					.and.callThrough()
 

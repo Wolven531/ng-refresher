@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing'
 import { FormsModule } from '@angular/forms'
-import { of, Subscription } from 'rxjs'
+import { Observable, of, Subscription } from 'rxjs'
 import { ApplicationPipesModule } from '../../application-pipes/application-pipes.module'
 import { HeroService } from '../../hero.service'
 import { Hero } from '../hero.interface'
@@ -54,12 +54,15 @@ describe('HeroSearchComponent', () => {
 		})
 
 		describe('invoke searchHeroes()', () => {
+			let origHeroes$: Observable<Hero[]>
 			let spyNext: jasmine.Spy
 			let subHeroes: Subscription
 
 			beforeEach(fakeAsync(() => {
 				spyNext = spyOn(component['searchQueries'], 'next')
 					.and.callThrough()
+
+				origHeroes$ = component.heroes$
 
 				component.searchHeroes('a')
 				subHeroes = component.heroes$.subscribe()
@@ -86,6 +89,9 @@ describe('HeroSearchComponent', () => {
 			it('passes query to searchQueries Subject', () => {
 				expect(spyNext).toHaveBeenCalledTimes(1)
 				expect(spyNext).toHaveBeenCalledWith('a')
+
+				// ensure the switchMap changed the observable
+				expect(component.heroes$).not.toEqual(origHeroes$)
 
 				// approach 3 - use fakeAsync and tick() in it()
 				// tick((HeroSearchComponent as any).MS_DELAY_SEARCH + 1)

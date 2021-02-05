@@ -160,12 +160,13 @@ describe('HeroService', () => {
 	})
 
 	describe('invoke searchHeroes()', () => {
+		const fakeSearchTerm = 'a'
 		let subSearchHeroes: Subscription
 
 		beforeEach(() => {
 			mockNet.get.and.returnValue(of([FAKE_HERO]))
 
-			subSearchHeroes = service.searchHeroes('a').subscribe()
+			subSearchHeroes = service.searchHeroes(fakeSearchTerm).subscribe()
 		})
 
 		afterEach(() => {
@@ -175,11 +176,11 @@ describe('HeroService', () => {
 		it('invokes HttpClient.get() properly', () => {
 			expect(mockNet.get).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(mockNet.get).toHaveBeenCalledWith(`${HeroService['ENDPOINT_HEROES']}/?name=a`)
+			expect(mockNet.get).toHaveBeenCalledWith(`${HeroService['ENDPOINT_HEROES']}/?name=${fakeSearchTerm}`)
 
 			expect(messageService.add).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(messageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HEROES_FOUND']}, query="a"`)
+			expect(messageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HEROES_FOUND']}, query="${fakeSearchTerm}"`)
 		})
 	})
 

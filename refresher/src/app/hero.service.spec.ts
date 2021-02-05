@@ -178,6 +178,8 @@ describe('HeroService', () => {
 			expect(mockNet.get).toHaveBeenCalledWith(`${HeroService['ENDPOINT_HEROES']}/?name=a`)
 
 			expect(messageService.add).toHaveBeenCalledTimes(1)
+			// private member property, use string accessor to avoid cast to any
+			expect(messageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HEROES_FOUND']}, query="a"`)
 		})
 	})
 

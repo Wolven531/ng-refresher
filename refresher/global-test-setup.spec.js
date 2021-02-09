@@ -1,3 +1,9 @@
+// run before any single it() block
+beforeAll(() => {
+	spyOn(window.console, 'info')
+	spyOn(window.console, 'log')
+})
+
 // run after every single it() block
 afterEach(done => {
 	// use setTimeout to move pending async code to non-main JS event queue

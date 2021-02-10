@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms'
 import { of } from 'rxjs'
 import { ApplicationPipesModule } from '../application-pipes/application-pipes.module'
 import { HeroService } from '../hero.service'
+import { HeroSearchComponent } from '../hero/hero-search/hero-search.component'
 import { Hero } from '../hero/hero.interface'
 import { DashboardComponent } from './dashboard.component'
 
@@ -20,6 +21,7 @@ describe('DashboardComponent', () => {
 		await TestBed.configureTestingModule({
 			declarations: [
 				DashboardComponent,
+				HeroSearchComponent, // used in template
 			],
 			imports: [
 				CommonModule,

@@ -38,11 +38,11 @@ module.exports = function (config) {
 				},
 				{
 					check: {
-						branches: 65,
+						branches: 70,
 						excludes: [],
-						functions: 80,
-						lines: 85,
-						statements: 85,
+						functions: 85,
+						lines: 90,
+						statements: 90,
 					},
 					type: 'text-summary',
 					watermarks: { // first is start of yellow, second is start of green

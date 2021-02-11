@@ -17,11 +17,11 @@ module.exports = function (config) {
 			reporters: [
 				{
 					check: { // More info - https://github.com/karma-runner/karma-coverage/blob/master/docs/configuration.md#check
-						branches: 65,
+						branches: 70,
 						excludes: [],
-						functions: 80,
-						lines: 85,
-						statements: 85,
+						functions: 85,
+						lines: 90,
+						statements: 90,
 					},
 					dir: require('path').join(__dirname, 'coverage'),
 					subdir: function (browser) {

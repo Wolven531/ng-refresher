@@ -52,7 +52,7 @@ export class HeroService {
 	getHero(id: number): Observable<Hero> {
 		return this.net.get<Hero>(`${HeroService.ENDPOINT_HEROES}/${id}`)
 			.pipe(
-				tap(_ => this.log(`${HeroService.MSG_HERO_FETCHED}, id=${id}`)),
+				tap(() => this.log(`${HeroService.MSG_HERO_FETCHED}, id=${id}`)),
 				catchError(this.handleError<Hero>(`getHero id=${id}`)),
 			)
 	}

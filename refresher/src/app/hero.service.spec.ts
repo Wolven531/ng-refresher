@@ -135,6 +135,34 @@ describe('HeroService', () => {
 		})
 	})
 
+	// !!! FIXME - below test is not working
+	// describe('invoke getHero() when it throws error', () => {
+	// 	let actualError: any
+	// 	let subGetHero: Subscription
+	// 	// let spyHandleError: jasmine.Spy
+
+	// 	beforeEach(() => {
+	// 		// spyHandleError = spyOn<any>(service, 'handleError')
+	// 		mockNet.get.and.throwError(new Error('fake error'))
+
+	// 		subGetHero = service.getHero(1).subscribe({
+	// 			error: err => {
+	// 				expect(false).toBeTrue()
+	// 				actualError = err
+	// 			},
+	// 		})
+	// 	})
+
+	// 	// afterEach(() => {
+	// 	// 	subGetHero.unsubscribe()
+	// 	// })
+
+	// 	it('invokes handleError() properly', () => {
+	// 		// expect(spyHandleError).toHaveBeenCalledTimes(1)
+	// 		expect(actualError).toEqual({})
+	// 	})
+	// })
+
 	describe('invoke getHeroes()', () => {
 		let subGetHeroes: Subscription
 

@@ -144,6 +144,7 @@ describe('HeroService', () => {
 			service.getHero(1).subscribe({
 				error: err => {
 					expect(err).toEqual({})
+					expect(window.console.error).toHaveBeenCalledOnceWith(err)
 				},
 			})
 		})

@@ -1,6 +1,7 @@
 // run before any single it() block
 beforeAll(() => {
 	spyOn(window.console, 'info')
+	spyOn(window.console, 'error')
 	spyOn(window.console, 'log')
 })
 

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { TestBed } from '@angular/core/testing'
-import { of, Subscription } from 'rxjs'
+import { of, Subscription, throwError } from 'rxjs'
 import { HeroService } from './hero.service'
 import { Hero } from './hero/hero.interface'
 import { MessageService } from './message.service'
@@ -135,33 +135,19 @@ describe('HeroService', () => {
 		})
 	})
 
-	// !!! FIXME - below test is not working
-	// describe('invoke getHero() when it throws error', () => {
-	// 	let actualError: any
-	// 	let subGetHero: Subscription
-	// 	// let spyHandleError: jasmine.Spy
+	describe('when getHero() throws error', () => {
+		it('invokes handleError() properly', () => {
+			mockNet.get.and.returnValue(
+				throwError(new Error('fake error'))
+			)
 
-	// 	beforeEach(() => {
-	// 		// spyHandleError = spyOn<any>(service, 'handleError')
-	// 		mockNet.get.and.throwError(new Error('fake error'))
-
-	// 		subGetHero = service.getHero(1).subscribe({
-	// 			error: err => {
-	// 				expect(false).toBeTrue()
-	// 				actualError = err
-	// 			},
-	// 		})
-	// 	})
-
-	// 	// afterEach(() => {
-	// 	// 	subGetHero.unsubscribe()
-	// 	// })
-
-	// 	it('invokes handleError() properly', () => {
-	// 		// expect(spyHandleError).toHaveBeenCalledTimes(1)
-	// 		expect(actualError).toEqual({})
-	// 	})
-	// })
+			service.getHero(1).subscribe({
+				error: err => {
+					expect(err).toEqual({})
+				},
+			})
+		})
+	})
 
 	describe('invoke getHeroes()', () => {
 		let subGetHeroes: Subscription

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
-import { TestBed } from '@angular/core/testing'
+import { TestBed, waitForAsync } from '@angular/core/testing'
 import { of, Subscription, throwError } from 'rxjs'
 import { HeroService } from './hero.service'
 import { Hero } from './hero/hero.interface'
@@ -136,18 +136,24 @@ describe('HeroService', () => {
 	})
 
 	describe('when getHero() throws error', () => {
-		it('invokes handleError() properly', () => {
+		const fakeError = new Error('fake error')
+
+		it('invokes handleError() properly', waitForAsync(done => {
 			mockNet.get.and.returnValue(
-				throwError(new Error('fake error'))
+				throwError(fakeError)
 			)
 
 			service.getHero(1).subscribe({
 				error: err => {
-					expect(err).toEqual({})
 					expect(window.console.error).toHaveBeenCalledOnceWith(err)
+					// !!! FIXME - below should **NOT** pass
+					expect(err).toEqual({})
+					// !!! FIXME - below should **NOT** pass
+					expect(messageService.add).toHaveBeenCalledOnceWith(`asdfqwer`)
+					done()
 				},
 			})
-		})
+		}))
 	})
 
 	describe('invoke getHeroes()', () => {

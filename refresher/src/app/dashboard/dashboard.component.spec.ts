@@ -53,7 +53,7 @@ describe('DashboardComponent', () => {
 		})
 
 		it('invokes HeroService.getHeroes()', () => {
-			expect(mockGetHeroes).toHaveBeenCalledTimes(1)
+			expect(mockGetHeroes).toHaveBeenCalledOnceWith()
 		})
 	})
 })

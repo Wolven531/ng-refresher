@@ -87,8 +87,7 @@ describe('HeroSearchComponent', () => {
 			})
 
 			it('passes query to searchQueries Subject', () => {
-				expect(spyNext).toHaveBeenCalledTimes(1)
-				expect(spyNext).toHaveBeenCalledWith('a')
+				expect(spyNext).toHaveBeenCalledOnceWith('a')
 
 				// ensure the switchMap changed the observable
 				expect(component.heroes$).not.toEqual(origHeroes$)
@@ -98,8 +97,7 @@ describe('HeroSearchComponent', () => {
 				// fixture.detectChanges()
 
 				// TODO - enable assertions when it is figured out
-				// expect(heroService.searchHeroes).toHaveBeenCalledTimes(1)
-				// expect(mockHeroService.searchHeroes).toHaveBeenCalledWith('a')
+				// expect(mockHeroService.searchHeroes).toHaveBeenCalledOnceWith('a')
 			})
 		})
 	})

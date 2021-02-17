@@ -72,8 +72,7 @@ describe('HeroDetailComponent', () => {
 		})
 
 		it('invokes HeroService.getHero()', () => {
-			expect(heroService.getHero).toHaveBeenCalledTimes(1)
-			expect(heroService.getHero).toHaveBeenCalledWith(1)
+			expect(heroService.getHero).toHaveBeenCalledOnceWith(1)
 			expect(component.hero).toEqual(fakeHero)
 		})
 
@@ -88,7 +87,7 @@ describe('HeroDetailComponent', () => {
 			})
 
 			it('invokes location.back()', () => {
-				expect(mockBack).toHaveBeenCalledTimes(1)
+				expect(mockBack).toHaveBeenCalledOnceWith()
 			})
 		})
 
@@ -98,8 +97,7 @@ describe('HeroDetailComponent', () => {
 			})
 	
 			it('invokes HeroService.getHero()', () => {
-				expect(heroService.updateHero).toHaveBeenCalledTimes(1)
-				expect(heroService.updateHero).toHaveBeenCalledWith(fakeHero)
+				expect(heroService.updateHero).toHaveBeenCalledOnceWith(fakeHero)
 			})
 		})
 	})

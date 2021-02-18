@@ -64,8 +64,8 @@ describe('HeroesComponent', () => {
 		})
 
 		it('invokes HeroService.getHeroes()', () => {
-			expect(spyLoadHeroes).toHaveBeenCalledTimes(1)
-			expect(mockGetHeroes).toHaveBeenCalledTimes(1)
+			expect(spyLoadHeroes).toHaveBeenCalledOnceWith()
+			expect(mockGetHeroes).toHaveBeenCalledOnceWith()
 		})
 
 		describe('invoke deleteHero() w/ MOCK_HERO_1', () => {
@@ -74,8 +74,7 @@ describe('HeroesComponent', () => {
 			})
 
 			it('invokes HeroService.deleteHero(), removes proper hero from heroes', () => {
-				expect(mockDeleteHero).toHaveBeenCalledTimes(1)
-				expect(mockDeleteHero).toHaveBeenCalledWith(MOCK_HERO_1)
+				expect(mockDeleteHero).toHaveBeenCalledOnceWith(MOCK_HERO_1)
 				expect(component.heroes).toEqual([MOCK_HERO_2])
 			})
 
@@ -98,8 +97,7 @@ describe('HeroesComponent', () => {
 				})
 
 				it('invokes HeroService.addHero(), adds hero to heroes', () => {
-					expect(mockAddHero).toHaveBeenCalledTimes(1)
-					expect(mockAddHero).toHaveBeenCalledWith({ name: MOCK_HERO_1.name })
+					expect(mockAddHero).toHaveBeenCalledOnceWith({ name: MOCK_HERO_1.name })
 					expect(component.heroes).toEqual([MOCK_HERO_2, MOCK_HERO_1])
 				})
 			})

@@ -71,17 +71,15 @@ describe('HeroService', () => {
 		})
 
 		it('invokes HttpClient.post() properly', () => {
-			expect(mockNet.post).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(mockNet.post).toHaveBeenCalledWith(
+			expect(mockNet.post).toHaveBeenCalledOnceWith(
 				HeroService['ENDPOINT_HEROES'],
 				FAKE_HERO,
 				service['httpOptions'],
 			)
 
-			expect(messageService.add).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(messageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HERO_ADDED']} w/ id=${FAKE_HERO.id}`)
+			expect(messageService.add).toHaveBeenCalledOnceWith(`[ HeroService ] ${HeroService['MSG_HERO_ADDED']} w/ id=${FAKE_HERO.id}`)
 		})
 	})
 
@@ -97,17 +95,15 @@ describe('HeroService', () => {
 		})
 
 		it('invokes HttpClient.delete() properly', () => {
-			expect(mockNet.delete).toHaveBeenCalledTimes(1)
-			expect(mockNet.delete).toHaveBeenCalledWith(
+			expect(mockNet.delete).toHaveBeenCalledOnceWith(
 				// private member property, use string accessor to avoid cast to any
 				`${HeroService['ENDPOINT_HEROES']}/${FAKE_HERO.id}`,
 				service['httpOptions'],
 			)
 
 			// TODO - re-enable beow assertions once working
-			// expect(messageService.add).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			// expect(messageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HERO_DELETED']}, id=${fakeHero.id}`)
+			// expect(messageService.add).toHaveBeenCalledOnceWith(`[ HeroService ] ${HeroService['MSG_HERO_DELETED']}, id=${fakeHero.id}`)
 		})
 	})
 
@@ -125,13 +121,11 @@ describe('HeroService', () => {
 		})
 
 		it('invokes HttpClient.get() properly', () => {
-			expect(mockNet.get).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(mockNet.get).toHaveBeenCalledWith(`${HeroService['ENDPOINT_HEROES']}/${FAKE_HERO.id}`)
+			expect(mockNet.get).toHaveBeenCalledOnceWith(`${HeroService['ENDPOINT_HEROES']}/${FAKE_HERO.id}`)
 
-			expect(messageService.add).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(messageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HERO_FETCHED']}, id=${FAKE_HERO.id}`)
+			expect(messageService.add).toHaveBeenCalledOnceWith(`[ HeroService ] ${HeroService['MSG_HERO_FETCHED']}, id=${FAKE_HERO.id}`)
 		})
 	})
 
@@ -170,13 +164,11 @@ describe('HeroService', () => {
 		})
 
 		it('invokes HttpClient.get() properly', () => {
-			expect(mockNet.get).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(mockNet.get).toHaveBeenCalledWith(HeroService['ENDPOINT_HEROES'])
+			expect(mockNet.get).toHaveBeenCalledOnceWith(HeroService['ENDPOINT_HEROES'])
 
-			expect(messageService.add).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(messageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HEROES_FETCHED']}`)
+			expect(messageService.add).toHaveBeenCalledOnceWith(`[ HeroService ] ${HeroService['MSG_HEROES_FETCHED']}`)
 		})
 	})
 
@@ -195,13 +187,11 @@ describe('HeroService', () => {
 		})
 
 		it('invokes HttpClient.get() properly', () => {
-			expect(mockNet.get).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(mockNet.get).toHaveBeenCalledWith(`${HeroService['ENDPOINT_HEROES']}/?name=${fakeSearchTerm}`)
+			expect(mockNet.get).toHaveBeenCalledOnceWith(`${HeroService['ENDPOINT_HEROES']}/?name=${fakeSearchTerm}`)
 
-			expect(messageService.add).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(messageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HEROES_FOUND']}, query="${fakeSearchTerm}"`)
+			expect(messageService.add).toHaveBeenCalledOnceWith(`[ HeroService ] ${HeroService['MSG_HEROES_FOUND']}, query="${fakeSearchTerm}"`)
 		})
 	})
 
@@ -217,17 +207,15 @@ describe('HeroService', () => {
 		})
 
 		it('invokes HttpClient.put() properly', () => {
-			expect(mockNet.put).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(mockNet.put).toHaveBeenCalledWith(
+			expect(mockNet.put).toHaveBeenCalledOnceWith(
 				HeroService['ENDPOINT_HEROES'],
 				FAKE_HERO,
 				service['httpOptions'],
 			)
 
-			expect(messageService.add).toHaveBeenCalledTimes(1)
 			// private member property, use string accessor to avoid cast to any
-			expect(messageService.add).toHaveBeenCalledWith(`[ HeroService ] ${HeroService['MSG_HERO_UPDATED']} id=${FAKE_HERO.id}`)
+			expect(messageService.add).toHaveBeenCalledOnceWith(`[ HeroService ] ${HeroService['MSG_HERO_UPDATED']} id=${FAKE_HERO.id}`)
 		})
 	})
 })

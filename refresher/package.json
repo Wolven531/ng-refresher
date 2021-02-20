@@ -5,7 +5,7 @@
     "url": "https://github.com/Wolven531/ng-refresher.git"
   },
   "name": "refresher",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "scripts": {
     "build": "ng build",
     "e2e": "ng e2e",

@@ -10,7 +10,8 @@ import { DashboardComponent } from './dashboard/dashboard.component'
 import { HeroService } from './hero.service'
 import { HeroModule } from './hero/hero.module'
 import { InMemoryDataService } from './in-memory-data.service'
-import { MessagesComponent } from './messages/messages.component'
+import { MessagesComponent } from './messages/messages.component';
+import { GameComponent } from './game/game.component'
 
 @NgModule({
 	bootstrap: [AppComponent],
@@ -18,6 +19,7 @@ import { MessagesComponent } from './messages/messages.component'
 		AppComponent,
 		DashboardComponent,
 		MessagesComponent,
+		GameComponent,
 	],
 	imports: [
 		BrowserModule,

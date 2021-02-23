@@ -10,15 +10,12 @@ describe('GameComponent', () => {
 			declarations: [ GameComponent ]
 		})
 		.compileComponents()
-	})
 
-	beforeEach(() => {
 		fixture = TestBed.createComponent(GameComponent)
 		component = fixture.componentInstance
-		fixture.detectChanges()
 	})
 
-	it('should create', () => {
+	it('creates component', () => {
 		expect(component).toBeTruthy()
 	})
 })

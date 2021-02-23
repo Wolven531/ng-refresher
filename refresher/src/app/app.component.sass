@@ -20,7 +20,7 @@ p
 nav
 	border: 2px solid #000
 	display: grid
-	grid-template-columns: repeat(2, 50%)
+	grid-template-columns: repeat(3, 33%)
 	grid-template-rows: 2em
 
 	a
@@ -29,10 +29,10 @@ nav
 		line-height: 2em
 		text-align: center
 
-		&:last-child
-			border-left-color: #000
-			border-left-style: solid
-			border-left-width: 1
+		&:not(:last-child)
+			border-right-color: #000
+			border-right-style: solid
+			border-right-width: 1
 
 a,
 a:visited,

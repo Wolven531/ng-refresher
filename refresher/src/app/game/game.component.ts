@@ -36,13 +36,6 @@ export class GameComponent implements OnInit {
 	}
 
 	private handlePositionLoaded(position: GeoPos): void {
-		position.coords.accuracy
-		position.coords.altitude
-		position.coords.altitudeAccuracy
-		position.coords.heading
-		position.coords.latitude
-		position.coords.longitude
-		position.coords.speed
 	}
 
 	private handlePositionError(): void {

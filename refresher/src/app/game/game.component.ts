@@ -17,8 +17,8 @@ interface GeoPos {
 
 @Component({
 	selector: 'app-game',
+	styleUrls: ['./game.component.sass'],
 	templateUrl: './game.component.html',
-	styleUrls: ['./game.component.sass']
 })
 export class GameComponent implements OnInit {
 	ngOnInit(): void {
@@ -26,6 +26,33 @@ export class GameComponent implements OnInit {
 			return
 		}
 
+		if (!window.navigator.permissions) {
+			this.getCurrentPosition()
+			return
+		}
+
+		window.navigator.permissions
+			.query({ name:'geolocation' })
+			.then(result => {
+				const token = 'geolocation permission'
+
+				switch (result.state) { // 'denied' | 'granted' | 'prompt'
+					case 'prompt':
+						console.info(`${token} prompt...`)
+						return
+					case 'granted':
+						console.info(`${token} granted...`)
+						this.getCurrentPosition()
+						return
+					case 'denied':
+					default:
+						console.info(`${token} denied...`)
+						return
+				}
+			})
+	}
+
+	private getCurrentPosition(): void {
 		window.navigator.geolocation.getCurrentPosition(
 			this.handlePositionLoaded,
 			this.handlePositionError,

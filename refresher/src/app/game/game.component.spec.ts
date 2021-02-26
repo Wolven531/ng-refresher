@@ -18,4 +18,23 @@ describe('GameComponent', () => {
 	it('creates component', () => {
 		expect(component).toBeTruthy()
 	})
+
+	describe('invoke ngOnInit() when window.navigator.permissions is undefined', () => {
+		beforeEach(() => {
+			spyOn(window.navigator.geolocation, 'getCurrentPosition')
+			spyOnProperty(window.navigator, 'permissions').and.returnValue(undefined)
+
+			component.ngOnInit()
+		})
+
+		it('invokes window.navigator.geolocation.getCurrentPosition() properly', () => {
+			expect(window.navigator.geolocation.getCurrentPosition).toHaveBeenCalledOnceWith(
+				component['handlePositionLoaded'],
+				component['handlePositionError'],
+				{
+					enableHighAccuracy: true,
+				}
+			)
+		})
+	})
 })

@@ -20,12 +20,12 @@ describe('GameComponent', () => {
 	})
 
 	describe('invoke ngOnInit() when window.navigator.permissions is undefined', () => {
-		beforeEach(() => {
+		beforeEach(waitForAsync(() => {
 			spyOn(window.navigator.geolocation, 'getCurrentPosition')
 			spyOnProperty(window.navigator, 'permissions').and.returnValue(undefined)
 
 			component.ngOnInit()
-		})
+		}))
 
 		it('invokes window.navigator.geolocation.getCurrentPosition() properly', () => {
 			expect(window.navigator.geolocation.getCurrentPosition).toHaveBeenCalledOnceWith(
@@ -39,23 +39,23 @@ describe('GameComponent', () => {
 	})
 
 	describe('invoke ngOnInit() when window.navigator.permissions is granted', () => {
-		beforeEach(() => {
+		beforeEach(waitForAsync(() => {
 			spyOn(window.navigator.geolocation, 'getCurrentPosition')
 			spyOn(window.navigator.permissions, 'query').and
 				.returnValue(Promise.resolve<PermissionStatus>({ state: 'granted' } as PermissionStatus))
 
 			component.ngOnInit()
-		})
-
-		it('invokes window.navigator.geolocation.getCurrentPosition() properly', waitForAsync(() => {
-			expect(window.navigator.permissions.query).toHaveBeenCalledOnceWith({ name: 'geolocation' })
-			// expect(window.navigator.geolocation.getCurrentPosition).toHaveBeenCalledOnceWith(
-			// 	component['handlePositionLoaded'],
-			// 	component['handlePositionError'],
-			// 	{
-			// 		enableHighAccuracy: true,
-			// 	}
-			// )
 		}))
+
+		it('invokes window.navigator.geolocation.getCurrentPosition() properly', () => {
+			expect(window.navigator.permissions.query).toHaveBeenCalledOnceWith({ name: 'geolocation' })
+			expect(window.navigator.geolocation.getCurrentPosition).toHaveBeenCalledOnceWith(
+				component['handlePositionLoaded'],
+				component['handlePositionError'],
+				{
+					enableHighAccuracy: true,
+				}
+			)
+		})
 	})
 })

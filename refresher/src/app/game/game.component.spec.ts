@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
+import { GeoPos } from '../constants'
 import { GameComponent } from './game.component'
 
 describe('GameComponent', () => {
@@ -39,7 +40,22 @@ describe('GameComponent', () => {
 
 	describe('invoke ngOnInit() when window.navigator.permissions is granted', () => {
 		beforeEach(waitForAsync(() => {
-			spyOn(window.navigator.geolocation, 'getCurrentPosition')
+			spyOn(window.navigator.geolocation, 'getCurrentPosition').and
+				.callFake((success, failure, opts) => {
+					// invoke success callback ourselves w/ fake position object
+					success({
+						coords: {
+							accuracy: 100,
+							altitude: 0,
+							altitudeAccuracy: 100,
+							heading: 1,
+							latitude: 100,
+							longitude: 100,
+							speed: 1,
+						},
+						timestamp: (new Date()).getTime()
+					} as GeoPos)
+				})
 			spyOn(window.navigator.permissions, 'query').and
 				.returnValue(Promise.resolve<PermissionStatus>({ state: 'granted' } as PermissionStatus))
 

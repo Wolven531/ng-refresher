@@ -1,14 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-
-interface GeoCoord {
-	accuracy: number
-	altitude: number
-	altitudeAccuracy: number
-	heading: number
-	latitude: number
-	longitude: number
-	speed: number
-}
+import { GeoCoord } from '../constants'
 
 interface GeoPos {
 	coords: GeoCoord

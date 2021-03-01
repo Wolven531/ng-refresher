@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { GeoCoord } from '../constants'
-
-interface GeoPos {
-	coords: GeoCoord
-	timestamp: number
-}
+import { GeoPos } from '../constants'
 
 @Component({
 	selector: 'app-game',

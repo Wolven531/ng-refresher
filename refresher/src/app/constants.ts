@@ -7,3 +7,8 @@ export interface GeoCoord {
 	longitude: number
 	speed: number
 }
+
+export interface GeoPos {
+	coords: GeoCoord
+	timestamp: number
+}

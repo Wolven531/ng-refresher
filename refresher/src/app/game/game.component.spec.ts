@@ -38,7 +38,7 @@ describe('GameComponent', () => {
 		})
 	})
 
-	describe('invoke ngOnInit() when window.navigator.permissions is granted', () => {
+	describe('invoke ngOnInit() when window.navigator.permissions is granted and getCurrentPosition invokes success callback', () => {
 		beforeEach(waitForAsync(() => {
 			spyOn(window.navigator.geolocation, 'getCurrentPosition').and
 				.callFake((success, failure, opts) => {
@@ -55,6 +55,37 @@ describe('GameComponent', () => {
 						},
 						timestamp: (new Date()).getTime()
 					} as GeoPos)
+				})
+			spyOn(window.navigator.permissions, 'query').and
+				.returnValue(Promise.resolve<PermissionStatus>({ state: 'granted' } as PermissionStatus))
+
+			component.ngOnInit()
+		}))
+
+		it('invokes window.navigator.geolocation.getCurrentPosition() properly', () => {
+			expect(window.navigator.permissions.query).toHaveBeenCalledOnceWith({ name: 'geolocation' })
+			expect(window.navigator.geolocation.getCurrentPosition).toHaveBeenCalledOnceWith(
+				component['handlePositionLoaded'],
+				component['handlePositionError'],
+				{
+					enableHighAccuracy: true,
+				}
+			)
+		})
+	})
+
+	describe('invoke ngOnInit() when window.navigator.permissions is granted and getCurrentPosition invokes failure callback', () => {
+		beforeEach(waitForAsync(() => {
+			spyOn(window.navigator.geolocation, 'getCurrentPosition').and
+				.callFake((success, failure, opts) => {
+					// invoke failure callback ourselves w/ mocked GeolocationPositionError object
+					failure({
+						code: -1,
+						message: '',
+						PERMISSION_DENIED: 0,
+						POSITION_UNAVAILABLE: 1,
+						TIMEOUT: 0,
+					})
 				})
 			spyOn(window.navigator.permissions, 'query').and
 				.returnValue(Promise.resolve<PermissionStatus>({ state: 'granted' } as PermissionStatus))

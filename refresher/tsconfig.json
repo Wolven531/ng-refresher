@@ -1,20 +1,37 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ]
-  }
+	"compileOnSave": false,
+	"compilerOptions": {
+		"baseUrl": "./",
+		"outDir": "./dist/out-tsc",
+		"sourceMap": true,
+		"declaration": false,
+		"downlevelIteration": true,
+		"experimentalDecorators": true,
+		"moduleResolution": "node",
+		"importHelpers": true,
+		"target": "es2015",
+		"module": "es2020",
+		"lib": [
+			"es2018",
+			"dom"
+		],
+		"paths": {
+			"ol": [
+				"node_modules/ol/src"
+			],
+			"ol/*": [
+				"node_modules/ol/src/*"
+			]
+		}
+	},
+	"include": [
+		"**/*.ts",
+		"node_modules/ol/**/*"
+	],
+	"typeAcquisition": {
+		"exclude": [
+			"ol"
+		]
+	}
 }

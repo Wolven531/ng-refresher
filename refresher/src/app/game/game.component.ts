@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core'
-import { GeoPos } from '../constants'
-
-// OSM stuff
-// more info - https://openlayers.org/en/latest/examples/localized-openstreetmap.html
-import 'ol/ol.css'
-import { Map, View } from 'ol'
-import { OSM } from 'ol/source'
+import { Graticule, Map, View } from 'ol'
 import TileLayer from 'ol/layer/Tile'
+import 'ol/ol.css'
+import { OSM } from 'ol/source'
+import { Stroke } from 'ol/style'
+import { GeoPos } from '../constants'
 
 @Component({
 	selector: 'app-game',
@@ -66,10 +64,22 @@ export class GameComponent implements OnInit {
 	}
 
 	private updateMap(): void {
+		// OSM stuff
+		// more info - https://openlayers.org/en/latest/examples/localized-openstreetmap.html
 		this.map = new Map({
 			layers: [
 				new TileLayer({
 					source: new OSM(),
+				}),
+				new Graticule({
+					showLabels: true,
+					// the style to use for the lines, optional
+					strokeStyle: new Stroke({
+						color: 'rgba(255,120,0,0.9)',
+						lineDash: [0.5, 4],
+						width: 2,
+					}),
+					wrapX: false,
 				}),
 			],
 			target: 'map',

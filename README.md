@@ -9,6 +9,9 @@
 * To add routing, `ng generate module app-routing --flat --module=app` ([more info](https://angular.io/tutorial/toh-pt5#add-the-approutingmodule))
 	* `--flat` puts the file in `src/app` instead of its own folder
 	* `--module=app` tells the CLI to register it in the imports array of the **App**Module
+* When updating Angular dependencies, **_always_** update core before cli
+	1. `ng update @angular/core`
+	1. `ng update @angular/cli`
 
 ## Running
 

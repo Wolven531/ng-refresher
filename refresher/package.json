@@ -4,14 +4,21 @@
     "name": "Anthony Williams",
     "url": "https://github.com/Wolven531/ng-refresher.git"
   },
+  "engines": {
+    "node": "15.5.1",
+    "npm": "6.14.11"
+  },
   "name": "refresher",
   "version": "2.0.0",
   "scripts": {
     "build": "ng build",
     "e2e": "ng e2e",
+    "heroku-postbuild": "ng build --prod",
     "lint": "ng lint",
     "ng": "ng",
-    "start": "ng serve --open",
+    "postinstall": "ng build --aot --prod",
+    "start": "node server.js",
+    "start:browser": "ng serve --open",
     "start:headless": "ng serve",
     "test": "ng test --browsers=ChromeHeadlessCustom --watch=false --reporters progress",
     "test-cc": "ng test --browsers=ChromeHeadlessCustom --watch=false --code-coverage",
@@ -30,9 +37,12 @@
     "@angular/platform-browser-dynamic": "~11.2.4",
     "@angular/router": "~11.2.4",
     "angular-in-memory-web-api": "^0.11.0",
+    "express": "^4.17.1",
     "ol": "^6.5.0",
+    "path": "^0.12.7",
     "rxjs": "^6.6.6",
     "tslib": "^2.1.0",
+    "typescript": "~4.0.5",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -55,7 +65,6 @@
     "protractor": "^7.0.0",
     "puppeteer": "8.0.0",
     "ts-node": "^9.1.1",
-    "tslint": "^6.1.3",
-    "typescript": "~4.0.5"
+    "tslint": "^6.1.3"
   }
 }

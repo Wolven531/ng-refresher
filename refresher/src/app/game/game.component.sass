@@ -1,3 +1,9 @@
-.map
-	height: 400px
-	width: 100%
+.map-container
+	border: 1px solid $darkGray
+	min-width: 300px // mobile width = 320px minus (10px * 2 padding)
+	padding: 10px
+	width: 80%
+
+	.map
+		height: 400px // mobile ATF height = 480px minus 80px for other interface elements
+		width: 100%

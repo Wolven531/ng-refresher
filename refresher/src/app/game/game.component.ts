@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Graticule, Map, View } from 'ol'
+import { Coordinate } from 'ol/coordinate'
 import TileLayer from 'ol/layer/Tile'
 import 'ol/ol.css'
 import { OSM } from 'ol/source'
@@ -58,6 +59,10 @@ export class GameComponent implements OnInit {
 	}
 
 	private handlePositionLoaded(position: GeoPos): void {
+		this.map.setView(new View({
+			center: [position.coords.longitude, position.coords.latitude],
+			zoom: 5,
+		}))
 	}
 
 	private handlePositionError(): void {

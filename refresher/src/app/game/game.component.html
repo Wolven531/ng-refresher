@@ -1,3 +1,13 @@
 <article class="map-container">
 	<div id="map" class="map"></div>
+	<br/>
+	<section>
+		<form [formGroup]="addressForm">
+			<input type="text" formControlName="line1" placeholder="Line 1" />
+			<input type="text" formControlName="line2" placeholder="Line 2" />
+			<input type="text" formControlName="city" placeholder="City" />
+			<input type="text" formControlName="state" placeholder="State" />
+			<input type="text" formControlName="zip" placeholder="Zip" />
+		</form>
+	</section>
 </article>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup } from '@angular/forms'
 import { Graticule, Map, View } from 'ol'
 import { Coordinate } from 'ol/coordinate'
 import TileLayer from 'ol/layer/Tile'
@@ -13,9 +14,22 @@ import { GeoPos } from '../constants'
 	templateUrl: './game.component.html',
 })
 export class GameComponent implements OnInit {
+	addressForm: FormGroup
 	map: Map
 
+	constructor(
+		private formBuilder: FormBuilder,
+	) { }
+
 	ngOnInit(): void {
+		this.addressForm = this.formBuilder.group({
+			city: ['', []],
+			line1: ['', []],
+			line2: ['', []],
+			state: ['', []],
+			zip: ['', []],
+		})
+
 		if (!window.navigator.geolocation) {
 			return
 		}
